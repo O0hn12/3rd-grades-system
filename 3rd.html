@@ -64,15 +64,27 @@ document.getElementById("welcome").style.display = "block";
 function goToPoints() {
   document.getElementById("welcome").style.display = "none";
   document.getElementById("pointsPage").style.display = "block";
-  loadNames();
 }
 
-// تحميل أسماء الأطفال من Google Sheet
+// ✅ تحميل أسماء الأطفال بدري جدًا مع فتح الصفحة + كاش محلي
 async function loadNames() {
-  const res = await fetch(apiURL + "load_names");
-  const data = await res.json();
-  if (data.names) allNames = data.names;
+  const cached = localStorage.getItem("allNames");
+  if (cached) {
+    allNames = JSON.parse(cached);
+    return;
+  }
+  try {
+    const res = await fetch(apiURL + "load_names");
+    const data = await res.json();
+    if (data.names) {
+      allNames = data.names;
+      localStorage.setItem("allNames", JSON.stringify(allNames));
+    }
+  } catch (err) {
+    console.error("خطأ في تحميل الأسماء", err);
+  }
 }
+window.addEventListener("DOMContentLoaded", loadNames);
 
 // إظهار اقتراحات الأسماء أثناء الكتابة
 const nameInput = document.getElementById("nameInput");
