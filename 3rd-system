@@ -50,7 +50,7 @@
   <script>
     async function getPoints() {
       const name = document.getElementById("nameInput").value;
-      const response = await fetch("https://YOUR_CLOUDFLARE_WORKER_URL/?name=" + encodeURIComponent(name));
+      const response = await fetch("https://3rd-system-grades.johnmamdouh777.workers.dev/?name=" + encodeURIComponent(name));
       const data = await response.json();
 
       if (data.error) {
@@ -68,3 +68,4 @@
   </script>
 </body>
 </html>
+
