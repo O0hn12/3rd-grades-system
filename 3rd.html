@@ -129,52 +129,69 @@ input:focus {
 
 <!-- شخصية زيزو -->
 <div class="zizo" aria-label="شخصية زيزو">
-  <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zizo Superhero Child">
-  <!-- الرأس -->
-  <circle cx="110" cy="80" r="50" fill="#FFE066" stroke="#E63946" stroke-width="4" class="breath"/>
-  
-  <!-- الشعر -->
-  <path d="M70 60 Q110 20 150 60 Q140 40 110 40 Q80 40 70 60 Z" fill="#6D4C41"/>
+  <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zizo Superhero Child Idle">
+  <!-- الرأس دائري + نفس -->
+  <circle cx="85" cy="70" r="34" fill="#FFE066" stroke="#D62828" stroke-width="3" class="breath"/>
 
-  <!-- القناع الأحمر -->
-  <path d="M70 60 H150 V90 H70 Z" fill="#D62828" opacity="0.9"/>
+  <!-- شعر بني بسيط -->
+  <path d="M51 62 Q85 40 119 62 Q114 50 100 46 Q85 42 70 46 Q58 50 51 62 Z" fill="#6D4C41"/>
 
-  <!-- العينان داخل القناع -->
+  <!-- قناع أحمر حول العينين -->
+  <rect x="58" y="58" width="54" height="18" rx="9" fill="#D62828" opacity="0.95"/>
+
+  <!-- عينان داخل القناع + رمشة -->
   <g class="blink">
-    <circle cx="90" cy="75" r="10" fill="#FFFFFF"/>
-    <circle cx="130" cy="75" r="10" fill="#FFFFFF"/>
-    <circle cx="90" cy="75" r="5" fill="#263238"/>
-    <circle cx="130" cy="75" r="5" fill="#263238"/>
+    <circle cx="73" cy="67" r="6.5" fill="#FFFFFF"/>
+    <circle cx="96" cy="67" r="6.5" fill="#FFFFFF"/>
+    <circle cx="73" cy="67" r="3.5" fill="#263238"/>
+    <circle cx="96" cy="67" r="3.5" fill="#263238"/>
   </g>
 
-  <!-- الخدود -->
-  <circle cx="85" cy="95" r="6" fill="#FFA6C1"/>
-  <circle cx="135" cy="95" r="6" fill="#FFA6C1"/>
+  <!-- خدود وردية -->
+  <circle cx="68" cy="79" r="4.5" fill="#FFA6C1" opacity="0.9"/>
+  <circle cx="101" cy="79" r="4.5" fill="#FFA6C1" opacity="0.9"/>
 
-  <!-- الفم -->
-  <path d="M85 110 Q110 125 135 110" stroke="#263238" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- فم مبتسم -->
+  <path d="M68 88 Q85 96 102 88" stroke="#263238" stroke-width="3.2" fill="none" stroke-linecap="round"/>
 
-  <!-- الجسم -->
-  <rect x="70" y="130" width="80" height="50" rx="12" fill="#247BA0"/>
-  <!-- شعار النجمة -->
-  <circle cx="110" cy="155" r="12" fill="#FFD166" stroke="#E63946" stroke-width="3"/>
-  <polygon points="110,145 113,153 121,153 115,158 117,165 110,160 103,165 105,158 99,153 107,153" fill="#FFFFFF"/>
+  <!-- الجسم (بدلة زرقاء) -->
+  <rect x="48" y="104" width="74" height="46" rx="12" fill="#247BA0"/>
 
-  <!-- الكاب -->
-  <path d="M60 130 Q40 150 60 170 Q110 180 160 170 Q180 150 160 130 Z" fill="#E63946" opacity="0.8"/>
+  <!-- شعار نجمة داخل دائرة صفراء على الصدر -->
+  <circle cx="85" cy="127" r="11" fill="#FFD166" stroke="#D62828" stroke-width="2"/>
+  <polygon points="85,118 87,124 93,124 88,127 89,133 85,130 81,133 82,127 77,124 83,124" fill="#FFFFFF"/>
 
-  <!-- اليد اليمنى مرفوعة -->
-  <g transform="translate(170,110)">
-    <rect x="-6" y="-22" width="12" height="28" rx="6" fill="#FFE066" stroke="#E63946" stroke-width="2"/>
-    <circle cx="0" cy="10" r="10" fill="#FFE066" stroke="#E63946" stroke-width="2"/>
-    <rect x="-18" y="-6" width="8" height="16" rx="4" fill="#FFE066" stroke="#E63946" stroke-width="2"/>
-    <rect x="-28" y="-4" width="8" height="16" rx="4" fill="#FFE066" stroke="#E63946" stroke-width="2"/>
-    <rect x="-38" y="-2" width="8" height="16" rx="4" fill="#FFE066" stroke="#E63946" stroke-width="2"/>
-    <rect x="-48" y="0" width="8" height="16" rx="4" fill="#FFE066" stroke="#E63946" stroke-width="2"/>
+  <!-- بنطلون/شورت أحمر -->
+  <rect x="48" y="148" width="74" height="18" rx="6" fill="#E63946"/>
+
+  <!-- قدمان بسيطة -->
+  <rect x="58" y="166" width="16" height="8" rx="3" fill="#6D4C41"/>
+  <rect x="96" y="166" width="16" height="8" rx="3" fill="#6D4C41"/>
+
+  <!-- كاب أحمر طائر للخلف -->
+  <path d="M45 110 C35 126, 44 142, 66 150 C95 160, 120 156, 122 140 C120 128, 105 118, 88 112 Z"
+        fill="#E63946" opacity="0.88"/>
+
+  <!-- ذراع يسار (مرتخٍ) -->
+  <path d="M52 116 C46 130, 48 144, 54 150" stroke="#FFE066" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- الذراع اليمنى مرفوعة مع إصبع واحدة (إشارة انتباه) -->
+  <g transform="translate(122,110)">
+    <!-- الذراع -->
+    <path d="M0 0 C 8 -8, 14 -18, 16 -28" stroke="#FFE066" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <!-- راحة اليد -->
+    <circle cx="16" cy="-30" r="6.8" fill="#FFE066" stroke="#D62828" stroke-width="1.8"/>
+    <!-- إصبع واحدة مرفوعة -->
+    <rect x="16" y="-52" width="6" height="20" rx="3" fill="#FFE066" stroke="#D62828" stroke-width="1.6"/>
   </g>
+
+  <!-- حافة ياقة بيضاء خفيفة -->
+  <rect x="48" y="104" width="74" height="8" rx="4" fill="#FFFFFF" opacity="0.7"/>
+
+  <!-- ظلال خفيفة لإضافة عمق -->
+  <ellipse cx="85" cy="175" rx="26" ry="6" fill="#000000" opacity="0.08"/>
 </svg>
 </div>
-
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
 let allNames = [];
