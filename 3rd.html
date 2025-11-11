@@ -120,7 +120,7 @@ input:focus {
   </div>
   <!-- شخصية تفاعلية -->
 <div id="characterBox">
-  <img id="character" src="https://copilot.microsoft.com/th/id/BCO.ea3b68fd-df52-40e2-9f87-7d1aa0ecd3f3.png" alt="الشخصية" />
+  <img id="character" src="https://copilot.microsoft.com/th/id/BCO.c93c7c4e-8a2f-4e1f-9b1e-6f2e6a3b7d1f.png" alt="الشخصية" />
 </div>
 </div>
 
@@ -174,23 +174,23 @@ function setCharacter(state) {
   char.className = ""; // reset
   switch(state) {
     case "start":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.7e1f4f6e-7f3a-4d3e-9c3e-8f2f6b3c9e3f.png";
+      char.src = "https://copilot.microsoft.com/th/id/BCO.3b1f5b6d-2e7e-4e7f-9c9f-9e6f6b3e9f3f.png"; // happy
       char.classList.add("happy");
       break;
     case "typing":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.9a2f3d4e-6c2b-4f1e-8d3e-7f2e6a3b9d2f.png";
+      char.src = "https://copilot.microsoft.com/th/id/BCO.4590a6d2-8b3e-4e2f-9c1e-7f2e6a3b9d2f.png"; // thinking
       char.classList.add("typing");
       break;
     case "waiting":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.5c3e2f1d-8b2a-4e3f-9d1e-6f3e7b2c8a1f.png";
+      char.src = "https://copilot.microsoft.com/th/id/BCO.b014f6c3-7a2e-4e3f-9d1e-6f3e7b2c8a1f.png"; // excited
       char.classList.add("waiting");
       break;
     case "result":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.3d2e1f4c-7a3b-4e2f-8c1e-5f2e6a3b7d1f.png";
+      char.src = "https://copilot.microsoft.com/th/id/BCO.ff3a6d2e-9c3e-4e2f-8c1e-5f2e6a3b7d1f.png"; // clap
       char.classList.add("result");
       break;
     default:
-      char.src = "https://copilot.microsoft.com/th/id/BCO.ea3b68fd-df52-40e2-9f87-7d1aa0ecd3f3.png";
+      char.src = "https://copilot.microsoft.com/th/id/BCO.c93c7c4e-8a2f-4e1f-9b1e-6f2e6a3b7d1f.png"; // idle
   }
 }
 
