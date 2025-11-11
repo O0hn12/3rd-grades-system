@@ -120,7 +120,7 @@ input:focus {
   </div>
   <!-- شخصية تفاعلية -->
 <div id="characterBox">
-  <img id="character" src="idle.png" alt="الشخصية" />
+  <img id="character" src="images/idle.png" alt="الشخصية" />
 </div>
 </div>
 
@@ -173,11 +173,11 @@ function setCharacter(state) {
   const char = document.getElementById("character");
   char.className = ""; // reset
   switch(state) {
-    case "start": char.src = "happy.png"; char.classList.add("happy"); break;
-    case "typing": char.src = "thinking.png"; char.classList.add("typing"); break;
-    case "waiting": char.src = "excited.png"; char.classList.add("waiting"); break;
-    case "result": char.src = "clap.png"; char.classList.add("result"); break;
-    default: char.src = "idle.png";
+    case "start": char.src = "images/happy.png"; char.classList.add("happy"); break;
+    case "typing": char.src = "images/thinking.png"; char.classList.add("typing"); break;
+    case "waiting": char.src = "images/excited.png"; char.classList.add("waiting"); break;
+    case "result": char.src = "images/clap.png"; char.classList.add("result"); break;
+    default: char.src = "images/idle.png";
   }
 }
 
