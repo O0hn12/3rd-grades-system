@@ -80,6 +80,25 @@ input:focus {
   input, .suggestions div, #result { font-size: 1.1em; }
   .container { padding: 20px 16px; }
 }
+
+  #characterBox {
+  text-align: center;
+  margin-bottom: 20px;
+}
+#character {
+  width: 150px;
+  transition: all 0.3s ease;
+}
+.happy { transform: scale(1.2); }
+.typing { transform: rotate(5deg); }
+.waiting { animation: bounce 1s infinite; }
+.result { transform: scale(1.4); }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+  
 </style>
 </head>
 <body>
@@ -99,6 +118,10 @@ input:focus {
     <button onclick="getPoints()">اعرض النتيجة</button>
     <div id="result"></div>
   </div>
+  <!-- شخصية تفاعلية -->
+<div id="characterBox">
+  <img id="character" src="idle.png" alt="الشخصية" />
+</div>
 </div>
 
 <script>
@@ -107,12 +130,6 @@ let allNames = [];
 
 // عرض صفحة البداية
 document.getElementById("welcome").style.display = "block";
-
-// الانتقال لصفحة النقاط
-function goToPoints() {
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("pointsPage").style.display = "block";
-}
 
 // تحميل أسماء الأطفال بدري جدًا مع فتح الصفحة + كاش محلي
 async function loadNames() {
@@ -137,6 +154,7 @@ window.addEventListener("DOMContentLoaded", loadNames);
 // إظهار اقتراحات الأسماء أثناء الكتابة
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
+  setCharacter("typing"); // الشخصية تتفاعل أثناء الكتابة
   const val = nameInput.value.trim();
   const box = document.getElementById("suggestions");
   box.innerHTML = "";
@@ -150,8 +168,29 @@ nameInput.addEventListener("input", () => {
   });
 });
 
+// دالة تغيير الشخصية
+function setCharacter(state) {
+  const char = document.getElementById("character");
+  char.className = ""; // reset
+  switch(state) {
+    case "start": char.src = "happy.png"; char.classList.add("happy"); break;
+    case "typing": char.src = "thinking.png"; char.classList.add("typing"); break;
+    case "waiting": char.src = "excited.png"; char.classList.add("waiting"); break;
+    case "result": char.src = "clap.png"; char.classList.add("result"); break;
+    default: char.src = "idle.png";
+  }
+}
+
+// الانتقال لصفحة النقاط
+function goToPoints() {
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("pointsPage").style.display = "block";
+  setCharacter("start"); // الشخصية تفرح عند البداية
+}
+
 // جلب النقاط من Cloudflare
 async function getPoints() {
+  setCharacter("waiting"); // الشخصية متحمسة أثناء الانتظار
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
   if (!allNames.includes(name)) {
@@ -173,6 +212,7 @@ async function getPoints() {
         🏆 <strong>المحصلة النهائية: ${data.final}</strong>
       `;
       resultBox.style.opacity = 1;
+      setCharacter("result"); // الشخصية تسقف أو تفرح عند ظهور النتيجة
     }, 200);
   }
 }
