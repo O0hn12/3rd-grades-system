@@ -107,8 +107,25 @@ input:focus {
 
 <!-- فقاعات -->
 <div class="float-layer" id="floatLayer"></div>
+  
+<!-- الصفحة الترحيبية -->
+<div id="welcome">
+  <h1>🎯 أهلاً بك 🎯</h1>
+  <button onclick="goToPoints()">شوف نقاطك ⭐</button>
+</div>
 
-<!-- شخصية زيزو -->
+<!-- صفحة عرض النقاط -->
+<div id="pointsPage">
+  <div class="container">
+    <h2>شوف نقاطك ⭐</h2>
+    <input id="nameInput" placeholder="اكتب اسمك هنا">
+    <div class="suggestions" id="suggestions"></div>
+    <button onclick="getPoints()">اعرض النتيجة</button>
+    <div id="result"></div>
+  </div>
+</div>
+
+  <!-- شخصية زيزو -->
 <div id="zizo-container">
 <svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zizo Superhero Kid with ball and hand on hip">
   <defs>
@@ -189,23 +206,6 @@ input:focus {
   <ellipse cx="150" cy="306" rx="46" ry="9" fill="#000" opacity="0.08"/>
 </svg>
   </div>
-
-<!-- الصفحة الترحيبية -->
-<div id="welcome">
-  <h1>🎯 أهلاً بك 🎯</h1>
-  <button onclick="goToPoints()">شوف نقاطك ⭐</button>
-</div>
-
-<!-- صفحة عرض النقاط -->
-<div id="pointsPage">
-  <div class="container">
-    <h2>شوف نقاطك ⭐</h2>
-    <input id="nameInput" placeholder="اكتب اسمك هنا">
-    <div class="suggestions" id="suggestions"></div>
-    <button onclick="getPoints()">اعرض النتيجة</button>
-    <div id="result"></div>
-  </div>
-</div>
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
 let allNames = [];
