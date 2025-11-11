@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>points show</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+
 <style>
 body {
   font-family: "Tajawal", sans-serif;
@@ -14,13 +16,14 @@ body {
   animation: gradientBG 15s ease infinite;
   display: flex; justify-content: center; align-items: center;
   height: 100vh; flex-direction: column;
+  overflow: hidden;
 }
 @keyframes gradientBG {
   0% {background-position: 0% 50%;}
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
-#welcome, #pointsPage { display: none; text-align: center; }
+#welcome, #pointsPage { display: none; text-align: center; z-index: 2; }
 h1 { font-size: 2.4em; color: #2d3436; text-shadow: 2px 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
 button {
   background: linear-gradient(45deg, #fd79a8, #e84393);
@@ -40,9 +43,7 @@ button:hover {
   width: 90%; max-width: 360px;
   box-sizing: border-box;
 }
-.container > * {
-  margin-bottom: 16px;
-}
+.container > * { margin-bottom: 16px; }
 input {
   width: 100%; padding: 14px;
   border: 1px solid #ccc; border-radius: 12px;
@@ -73,6 +74,29 @@ input:focus {
   color: #2d3436;
   transition: opacity 0.5s ease;
 }
+
+/* الشخصية */
+#characterBox {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+  animation: floatAround 25s linear infinite;
+}
+@keyframes floatAround {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(60vw, -10vh); }
+  50% { transform: translate(40vw, 20vh); }
+  75% { transform: translate(10vw, -15vh); }
+  100% { transform: translate(0, 0); }
+}
+lord-icon {
+  width: 150px;
+  height: 150px;
+}
+
 @media (max-width: 480px) {
   h1 { font-size: 1.8em; }
   h2 { font-size: 1.4em; }
@@ -80,25 +104,6 @@ input:focus {
   input, .suggestions div, #result { font-size: 1.1em; }
   .container { padding: 20px 16px; }
 }
-
-  #characterBox {
-  text-align: center;
-  margin-bottom: 20px;
-}
-#character {
-  width: 150px;
-  transition: all 0.3s ease;
-}
-.happy { transform: scale(1.2); }
-.typing { transform: rotate(5deg); }
-.waiting { animation: bounce 1s infinite; }
-.result { transform: scale(1.4); }
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-  
 </style>
 </head>
 <body>
@@ -118,10 +123,18 @@ input:focus {
     <button onclick="getPoints()">اعرض النتيجة</button>
     <div id="result"></div>
   </div>
-  <!-- شخصية تفاعلية -->
-<div id="characterBox">
-  <img id="character" src="https://copilot.microsoft.com/th/id/BCO.c93c7c4e-8a2f-4e1f-9b1e-6f2e6a3b7d1f.png" alt="الشخصية" />
 </div>
+
+<!-- الشخصية التفاعلية -->
+<div id="characterBox">
+  <lord-icon
+    id="character"
+    src="https://cdn.lordicon.com/bhfjfgqz.json"
+    trigger="loop"
+    delay="1000"
+    colors="primary:#ff7675,secondary:#6c5ce7"
+    style="width:150px;height:150px">
+  </lord-icon>
 </div>
 
 <script>
@@ -131,7 +144,7 @@ let allNames = [];
 // عرض صفحة البداية
 document.getElementById("welcome").style.display = "block";
 
-// تحميل أسماء الأطفال بدري جدًا مع فتح الصفحة + كاش محلي
+// تحميل الأسماء من Cloudflare
 async function loadNames() {
   const cached = localStorage.getItem("allNames");
   if (cached) {
@@ -151,15 +164,15 @@ async function loadNames() {
 }
 window.addEventListener("DOMContentLoaded", loadNames);
 
-// إظهار اقتراحات الأسماء أثناء الكتابة
+// إظهار الاقتراحات
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
-  setCharacter("typing"); // الشخصية تتفاعل أثناء الكتابة
+  setCharacter("typing");
   const val = nameInput.value.trim();
   const box = document.getElementById("suggestions");
   box.innerHTML = "";
   if (!val) return;
-  const matches = allNames.filter(n => n.includes(val)).slice(0,5);
+  const matches = allNames.filter(n => n.includes(val)).slice(0, 5);
   matches.forEach(name => {
     const div = document.createElement("div");
     div.textContent = name;
@@ -168,29 +181,24 @@ nameInput.addEventListener("input", () => {
   });
 });
 
-// دالة تغيير الشخصية
+// دالة تغيير حالة الشخصية
 function setCharacter(state) {
   const char = document.getElementById("character");
-  char.className = ""; // reset
-  switch(state) {
+  switch (state) {
     case "start":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.3b1f5b6d-2e7e-4e7f-9c9f-9e6f6b3e9f3f.png"; // happy
-      char.classList.add("happy");
+      char.setAttribute("src", "https://cdn.lordicon.com/bhfjfgqz.json"); // فرحان
       break;
     case "typing":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.4590a6d2-8b3e-4e2f-9c1e-7f2e6a3b9d2f.png"; // thinking
-      char.classList.add("typing");
+      char.setAttribute("src", "https://cdn.lordicon.com/puvaffet.json"); // بيفكر
       break;
     case "waiting":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.b014f6c3-7a2e-4e3f-9d1e-6f3e7b2c8a1f.png"; // excited
-      char.classList.add("waiting");
+      char.setAttribute("src", "https://cdn.lordicon.com/ssvybplt.json"); // مستني
       break;
     case "result":
-      char.src = "https://copilot.microsoft.com/th/id/BCO.ff3a6d2e-9c3e-4e2f-8c1e-5f2e6a3b7d1f.png"; // clap
-      char.classList.add("result");
+      char.setAttribute("src", "https://cdn.lordicon.com/uqpazftn.json"); // فرحان بالنتيجة
       break;
     default:
-      char.src = "https://copilot.microsoft.com/th/id/BCO.c93c7c4e-8a2f-4e1f-9b1e-6f2e6a3b7d1f.png"; // idle
+      char.setAttribute("src", "https://cdn.lordicon.com/bhfjfgqz.json");
   }
 }
 
@@ -198,12 +206,12 @@ function setCharacter(state) {
 function goToPoints() {
   document.getElementById("welcome").style.display = "none";
   document.getElementById("pointsPage").style.display = "block";
-  setCharacter("start"); // الشخصية تفرح عند البداية
+  setCharacter("start");
 }
 
-// جلب النقاط من Cloudflare
+// جلب النقاط
 async function getPoints() {
-  setCharacter("waiting"); // الشخصية متحمسة أثناء الانتظار
+  setCharacter("waiting");
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
   if (!allNames.includes(name)) {
@@ -225,7 +233,7 @@ async function getPoints() {
         🏆 <strong>المحصلة النهائية: ${data.final}</strong>
       `;
       resultBox.style.opacity = 1;
-      setCharacter("result"); // الشخصية تسقف أو تفرح عند ظهور النتيجة
+      setCharacter("result");
     }, 200);
   }
 }
