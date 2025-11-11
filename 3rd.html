@@ -178,19 +178,19 @@ function setCharacter(state) {
   let url = "";
   switch(state) {
     case "start":
-      url = "animations/hero_hi.json"; // نفس الشخصية - حركة Hi
+      url = "https://assets2.lottiefiles.com/packages/lf20_1pxqjqps.json"; // Hi
       break;
     case "typing":
-      url = "animations/hero_typing.json"; // نفس الشخصية - بيكتب
+      url = "https://assets9.lottiefiles.com/packages/lf20_tutvdkg0.json"; // Typing
       break;
     case "waiting":
-      url = "animations/hero_waiting.json"; // نفس الشخصية - مستني
+      url = "https://assets2.lottiefiles.com/packages/lf20_usmfx6bp.json"; // Waiting
       break;
     case "result":
-      url = "animations/hero_clap.json"; // نفس الشخصية - بيسقف
+      url = "https://assets5.lottiefiles.com/packages/lf20_j1adxtyb.json"; // Clap
       break;
     default:
-      url = "animations/hero_idle.json"; // نفس الشخصية - واقف عادي
+      url = "https://assets1.lottiefiles.com/packages/lf20_9cyylh.json"; // Idle
   }
   characterAnim.destroy();
   characterAnim = lottie.loadAnimation({
@@ -201,6 +201,7 @@ function setCharacter(state) {
     path: url
   });
 }
+
 // الانتقال لصفحة النقاط
 function goToPoints() {
   document.getElementById("welcome").style.display = "none";
