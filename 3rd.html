@@ -250,8 +250,16 @@ input:focus {
   <circle cx="166" cy="136" r="8" fill="url(#cheekGrad)"/>
 
   <!-- الأذنين -->
-  <circle cx="102" cy="120" r="6" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
-  <circle cx="198" cy="120" r="6" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+  <path d="M102 120 
+           a6 6 0 1 0 0.1 0" 
+        fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+  <circle cx="102" cy="120" r="3" fill="#E6B98F" opacity="0.6"/> <!-- تجويف داخلي -->
+  
+  <!-- الأذن اليمنى -->
+  <path d="M198 120 
+           a6 6 0 1 0 0.1 0" 
+        fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+  <circle cx="198" cy="120" r="3" fill="#E6B98F" opacity="0.6"/> <!-- تجويف داخلي -->
 </g>
 
 <!-- الرقبة -->
