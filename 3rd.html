@@ -133,161 +133,185 @@ input:focus {
   <!-- شخصية زيزو -->
 <div id="zizo-container">
 <svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- Gradients -->
-    <radialGradient id="skinGrad" cx="50%" cy="50%" r="60%">
-      <stop offset="0%" stop-color="#FFD9B0"/>
-      <stop offset="100%" stop-color="#FFC89A"/>
-    </radialGradient>
-    <radialGradient id="cheekGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFA6C1"/>
-      <stop offset="100%" stop-color="#FFA6C1" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="maskGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#D62828"/>
-      <stop offset="100%" stop-color="#B71C1C"/>
-    </linearGradient>
-    <radialGradient id="eyeGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#263238"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.8"/>
-    </radialGradient>
-    <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1B4F72"/>
-      <stop offset="100%" stop-color="#0D324C"/>
-    </linearGradient>
-    <linearGradient id="capeGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#B3212B"/>
-      <stop offset="100%" stop-color="#7B1F24"/>
-    </linearGradient>
-    <radialGradient id="ballGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FF6B6B"/>
-      <stop offset="100%" stop-color="#C62828"/>
-    </radialGradient>
+<defs>
+  <!-- تدرجات البشرة -->
+  <radialGradient id="skinGrad" cx="50%" cy="50%" r="60%">
+    <stop offset="0%" stop-color="#FFD9B0"/>
+    <stop offset="40%" stop-color="#FFC89A"/>
+    <stop offset="100%" stop-color="#E6B98F"/>
+  </radialGradient>
+  <radialGradient id="cheekGrad" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FFA6C1"/>
+    <stop offset="100%" stop-color="#FFA6C1" stop-opacity="0"/>
+  </radialGradient>
 
-    <!-- Filters -->
-    <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.2"/>
-    </filter>
-    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.15"/>
-    </filter>
-  </defs>
+  <!-- تدرجات القناع -->
+  <linearGradient id="maskGrad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#D62828"/>
+    <stop offset="50%" stop-color="#FF3D3D"/>
+    <stop offset="100%" stop-color="#B71C1C"/>
+  </linearGradient>
 
-  <!-- الرأس -->
-  <g filter="url(#innerShadow)">
-    <ellipse cx="150" cy="120" rx="48" ry="46" fill="url(#skinGrad)" stroke="#CC3A3A" stroke-width="1.6"/>
-    <!-- الشعر -->
-    <path d="M102 100 c12 -24 36 -34 60 -30 c24 4 38 18 44 30
-             c-10 -6 -22 -8 -32 -6 c-8 -8 -20 -12 -32 -12 c-16 0 -28 6 -40 18 z"
-          fill="#5D4037"/>
-    <path d="M130 86 c10 -6 22 -8 30 -6 c-6 8 -16 14 -26 18 c-4 -2 -6 -6 -4 -12 z"
-          fill="#4E342E"/>
-    <path d="M176 92 c8 0 16 6 18 12 c-8 4 -18 6 -24 4 c-2 -6 2 -12 6 -16 z"
-          fill="#4E342E"/>
-    <path d="M140 80 q10 -6 20 0" stroke="#3E2723" stroke-width="1" opacity="0.4"/>
+  <!-- تدرجات الشعر -->
+  <linearGradient id="hairGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#5D4037"/>
+    <stop offset="50%" stop-color="#4E342E"/>
+    <stop offset="100%" stop-color="#3E2723"/>
+  </linearGradient>
 
-    <!-- القناع -->
-    <path d="M114 108 c0 -10 8 -14 18 -14 h36 c10 0 18 4 18 14 v20 c0 10 -8 14 -18 14 h-36 c-10 0 -18 -4 -18 -14 z"
-          fill="url(#maskGrad)"/>
-    <path d="M114 108 h72 v4 c-24 6 -48 8 -72 8 z" fill="#FF6B6B" opacity="0.3"/>
-    <path d="M120 110 q30 6 60 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+  <!-- تدرجات البدلة -->
+  <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1B4F72"/>
+    <stop offset="50%" stop-color="#15607A"/>
+    <stop offset="100%" stop-color="#0F3E5A"/>
+  </linearGradient>
 
-    <!-- الحواجب -->
-    <path d="M132 112 q6 -4 12 0" stroke="#3C1F1F" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M156 112 q6 -4 12 0" stroke="#3C1F1F" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- لمعان البدلة -->
+  <linearGradient id="suitShine" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
 
-    <!-- العينين -->
-    <ellipse cx="138" cy="122" rx="8.5" ry="6.3" fill="#fff"/>
-    <ellipse cx="162" cy="122" rx="8.5" ry="6.3" fill="#fff"/>
-    <circle cx="138" cy="122" r="3.8" fill="url(#eyeGrad)"/>
-    <circle cx="162" cy="122" r="3.8" fill="url(#eyeGrad)"/>
-    <circle cx="140" cy="120" r="1.2" fill="#fff" opacity="0.8"/>
-    <circle cx="164" cy="120" r="1.2" fill="#fff" opacity="0.8"/>
-
-    <!-- الأنف والفم -->
-    <path d="M150 132 q-2 3 0 6 q2 -3 0 -6 z" fill="#D9927D" opacity="0.8"/>
-    <path d="M148 134 q2 2 4 0" stroke="#B76E5A" stroke-width="0.8" opacity="0.6"/>
-    <path d="M134 144 Q150 152 166 144" stroke="#263238" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path d="M140 146 q10 4 20 0" stroke="#fff" stroke-width="1" opacity="0.6"/>
-    <path d="M134 144 Q150 154 166 144 Q150 160 134 144" fill="#263238" opacity="0.1"/>
-
-    <!-- الخدود -->
-    <circle cx="134" cy="136" r="8" fill="url(#cheekGrad)"/>
-    <circle cx="166" cy="136" r="8" fill="url(#cheekGrad)"/>
-
-    <!-- الأذنين -->
-    <circle cx="102" cy="120" r="6" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
-    <circle cx="198" cy="120" r="6" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
-    <path d="M100 120 q2 2 4 0" stroke="#B76E5A" stroke-width="0.6" opacity="0.5"/>
-    <path d="M196 120 q2 2 4 0" stroke="#B76E5A" stroke-width="0.6" opacity="0.5"/>
-  </g>
-
-  <!-- الرقبة -->
-  <rect x="142" y="164" width="16" height="12" rx="4" fill="url(#skinGrad)"/>
-  <path d="M142 174 h16" stroke="#000" stroke-width="1" opacity="0.1"/>
-
-  <!-- البدلة -->
-  <path d="M118 178 c0 -8 8 -14 18 -14 h28 c10 0 18 6 18 14 v64 c0 26 -18 46 -32 50 c-16 -4 -32 -24 -32 -50 z"
-        fill="url(#suitGrad)"/>
-  <path d="M130 190 q10 6 20 0" stroke="#1B4F72" stroke-width="1.2" opacity="0.3"/>
-  <path d="M130 210 q10 6 20 0" stroke="#1B4F72" stroke-width="1.2" opacity="0.3"/>
-  <path d="M126 178 q24 12 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
-  <path d="M118 178 v64" stroke="#fff" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.3"/>
-  <path d="M182 178 v64" stroke="#fff" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.3"/>
-
-  <!-- الكاب -->
-  <g class="cape">
-    <path d="M110 182 c-22 10 -32 26 -22 44 c18 32 70 40 112 32 c26 -5 36 -22 26 -40
-             c-12 -20 -32 -34 -52 -40 c-16 8 -40 6 -64 4 z"
-          fill="url(#capeGrad)" opacity="0.92"/>
-    <path d="M120 190 q20 10 40 0" stroke="#B3212B" stroke-width="2" opacity="0.4"/>
-    <path d="M130 200 q20 10 40 0" stroke="#B3212B" stroke-width="2" opacity="0.4"/>
-    <path d="M115 186 q30 6 60 0" stroke="#fff" stroke-width="2" opacity="0.3"/>
-    <path d="M110 182 q60 30 120 0" stroke="#fff" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
-  </g>
-
-  <!-- الذراعان والساقان -->
-  <path d="M202 206 c12 10 18 22 14 34 c-6 12 -16 16 -22 12 c-7 -4 -12 -14 -15 -24 c10 6 16 8 23 -10 z" fill="url(#skinGrad)"/>
-  <path d="M118 206 c-12 10 -18 22 -14 34 c6 12 16 16 22 12 c7 -4 12 -14 15 -24 c-10 6 -16 8 -23 -10 z" fill="url(#skinGrad)"/>
-  <path d="M140 244 v48" stroke="#D62828" stroke-width="10" stroke-linecap="round"/>
-  <path d="M160 244 v48" stroke="#D62828" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="140" cy="268" r="3" fill="#B71C1C" opacity="0.4"/>
-  <circle cx="160" cy="268" r="3" fill="#B71C1C" opacity="0.4"/>
-
-  <!-- الحذاءان -->
-  <g>
-    <rect x="128" y="292" width="24" height="10" rx="4" fill="#6D4C41"/>
-    <rect x="148" y="292" width="24" height="10" rx="4" fill="#6D4C41"/>
-    <path d="M128 292 h24" stroke="#000" stroke-width="2" opacity="0.2"/>
-    <path d="M148 292 h24" stroke="#000" stroke-width="2" opacity="0.2"/>
-    <path d="M130 294 h20" stroke="#fff" stroke-width="1" opacity="0.3"/>
-    <path d="M150 294 h20" stroke="#fff" stroke-width="1" opacity="0.3"/>
-    <rect x="128" y="300" width="24" height="4" fill="#3E2723"/>
-    <rect x="148" y="300" width="24" height="4" fill="#3E2723"/>
-    <path d="M130 292 q10 4 20 0" stroke="#fff" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.3"/>
-    <path d="M150 292 q10 4 20 0" stroke="#fff" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.3"/>
-  </g>
+  <!-- تدرجات الكاب -->
+  <linearGradient id="capeGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#B3212B"/>
+    <stop offset="50%" stop-color="#E63946"/>
+    <stop offset="100%" stop-color="#7F1C1F"/>
+  </linearGradient>
 
   <!-- الكرة -->
-  <g transform="translate(110,240)">
-    <ellipse rx="18" ry="24" fill="url(#ballGrad)" stroke="#8E1A1F" stroke-width="1"/>
-    <path d="M-12,-8 h24 M-12,0 h24 M-12,8 h24" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
-    <ellipse cx="-6" cy="-10" rx="8" ry="6" fill="#fff" opacity="0.4"/>
-    <path d="M-10,-12 q10 6 20 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
-  </g>
+  <radialGradient id="ballGrad" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FFF"/>
+    <stop offset="50%" stop-color="#FFD166"/>
+    <stop offset="100%" stop-color="#FFB300"/>
+  </radialGradient>
 
-  <!-- النجمة والحزام -->
-  <g transform="translate(150,206)">
-    <circle r="12" fill="#FFD166" stroke="#E63946" stroke-width="2"/>
-    <polygon points="0,-8 2,-2 8,-2 3,1 4,7 0,4 -4,7 -3,1 -8,-2 -2,-2" fill="#fff"/>
-    <path d="M-6,-6 q6 4 12 0" stroke="#fff" stroke-width="1" opacity="0.4"/>
-  </g>
-  <rect x="126" y="238" width="48" height="6" rx="3" fill="#E63946"/>
-  <rect x="144" y="238" width="12" height="6" rx="2" fill="#FFD700" opacity="0.8"/>
-  <path d="M126 238 q24 4 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+  <!-- فلتر الظلال الداخلية -->
+  <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
+    <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.2"/>
+  </filter>
 
-  <!-- ظل أرضي -->
-  <ellipse cx="150" cy="306" rx="46" ry="9" fill="#000" opacity="0.08"/>
+  <!-- فلتر لمعان الكاب -->
+  <linearGradient id="capeShine" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#fff" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+
+<!-- الرأس مع الظلال -->
+<g filter="url(#innerShadow)">
+  <ellipse cx="150" cy="120" rx="48" ry="46" fill="url(#skinGrad)" stroke="#CC3A3A" stroke-width="1.6"/>
+
+  <!-- الشعر بخصلات إضافية -->
+  <path d="M102 100 c12 -24 36 -34 60 -30 c24 4 38 18 44 30 c-10 -6 -22 -8 -32 -6
+           c-8 -8 -20 -12 -32 -12 c-16 0 -28 6 -40 18 z" fill="url(#hairGrad)"/>
+  <path d="M130 86 c10 -6 22 -8 30 -6 c-6 8 -16 14 -26 18 c-4 -2 -6 -6 -4 -12 z" fill="url(#hairGrad)"/>
+  <path d="M176 92 c8 0 16 6 18 12 c-8 4 -18 6 -24 4 c-2 -6 2 -12 6 -16 z" fill="url(#hairGrad)"/>
+  <path d="M140 80 q10 -6 20 0" stroke="#3E2723" stroke-width="1" opacity="0.5"/>
+  <!-- خصل شعر إضافية -->
+  <path d="M110 95 q15 -8 25 0" stroke="#3E2723" stroke-width="0.7" opacity="0.5"/>
+  <path d="M170 90 q10 -6 18 4" stroke="#3E2723" stroke-width="0.6" opacity="0.4"/>
+
+  <!-- القناع مع تفاصيل إضافية -->
+  <path d="M114 108 c0 -10 8 -14 18 -14 h36 c10 0 18 4 18 14 v20 c0 10 -8 14 -18 14 h-36 c-10 0 -18 -4 -18 -14 z"
+        fill="url(#maskGrad)"/>
+  <path d="M120 110 q30 6 60 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+  <path d="M114 108 h72 v4 c-24 6 -48 8 -72 8 z" fill="#FF6B6B" opacity="0.3"/>
+  <!-- تفاصيل إضافية للقناع -->
+  <path d="M114 128 h72" stroke="#fff" stroke-width="0.8" opacity="0.2"/>
+  <path d="M114 108 q36 12 72 0" stroke="#000" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- الحواجب -->
+  <path d="M132 112 q6 -4 12 0" stroke="#3C1F1F" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M156 112 q6 -4 12 0" stroke="#3C1F1F" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- العينين مع لمعات إضافية -->
+  <ellipse cx="138" cy="122" rx="8.5" ry="6.3" fill="#fff"/>
+  <ellipse cx="162" cy="122" rx="8.5" ry="6.3" fill="#fff"/>
+  <circle cx="138" cy="122" r="3.8" fill="#263238"/>
+  <circle cx="162" cy="122" r="3.8" fill="#263238"/>
+  <circle cx="140" cy="120" r="1.2" fill="#fff" opacity="0.8"/>
+  <circle cx="164" cy="120" r="1.2" fill="#fff" opacity="0.8"/>
+  <circle cx="138" cy="124" r="0.8" fill="#fff" opacity="0.6"/>
+  <circle cx="162" cy="124" r="0.8" fill="#fff" opacity="0.6"/>
+  <ellipse cx="138" cy="122" rx="2.5" ry="1.2" fill="#000" opacity="0.1"/>
+  <ellipse cx="162" cy="122" rx="2.5" ry="1.2" fill="#000" opacity="0.1"/>
+  <!-- تأثير ظل داخل العين -->
+  <ellipse cx="138" cy="122" rx="1.5" ry="0.8" fill="#000" opacity="0.2"/>
+  <ellipse cx="162" cy="122" rx="1.5" ry="0.8" fill="#000" opacity="0.2"/>
+
+  <!-- الأنف والفم -->
+  <path d="M150 132 q-2 3 0 6 q2 -3 0 -6 z" fill="#D9927D" opacity="0.8"/>
+  <path d="M148 134 q2 2 4 0" stroke="#B76E5A" stroke-width="0.8" opacity="0.6"/>
+  <path d="M134 144 Q150 152 166 144" stroke="#263238" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <path d="M140 146 q10 4 20 0" stroke="#fff" stroke-width="1" opacity="0.6"/>
+  <path d="M134 144 Q150 154 166 144 Q150 160 134 144" fill="#263238" opacity="0.1"/>
+  <!-- الخدود -->
+  <circle cx="134" cy="136" r="8" fill="url(#cheekGrad)"/>
+  <circle cx="166" cy="136" r="8" fill="url(#cheekGrad)"/>
+
+  <!-- الأذنين -->
+  <circle cx="102" cy="120" r="6" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+  <circle cx="198" cy="120" r="6" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+</g>
+
+<!-- الرقبة -->
+<rect x="142" y="164" width="16" height="12" rx="4" fill="url(#skinGrad)"/>
+<path d="M142 174 h16" stroke="#000" stroke-width="1" opacity="0.1"/>
+
+<!-- البدلة مع لمعان وطيات إضافية -->
+<path d="M118 178 c0 -8 8 -14 18 -14 h28 c10 0 18 6 18 14 v64 c0 26 -18 46 -32 50 c-16 -4 -32 -24 -32 -50 z"
+      fill="url(#suitGrad)"/>
+<path d="M126 178 q24 12 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+<path d="M118 178 c0 -8 8 -14 18 -14 h28 c10 0 18 6 18 14 v64 c0 26 -18 46 -32 50 c-16 -4 -32 -24 -32 -50 z"
+      fill="url(#suitShine)" opacity="0.35"/>
+<!-- طيات إضافية على البدلة -->
+<path d="M118 200 q32 16 48 0" stroke="#fff" stroke-width="0.8" opacity="0.15"/>
+<path d="M118 220 q32 16 48 0" stroke="#fff" stroke-width="0.5" opacity="0.1"/>
+<path d="M130 180 q16 8 32 0" stroke="#fff" stroke-width="0.6" opacity="0.2"/>
+
+<!-- الكاب مع طيات ولمعان -->
+<g class="cape">
+  <path d="M110 182 c-22 10 -32 26 -22 44 c18 32 70 40 112 32 c26 -5 36 -22 26 -40
+           c-12 -20 -32 -34 -52 -40 c-16 8 -40 6 -64 4 z" fill="url(#capeGrad)" opacity="0.92"/>
+  <path d="M110 182 c-22 10 -32 26 -22 44 c18 32 70 40 112 32 c26 -5 36 -22 26 -40
+           c-12 -20 -32 -34 -52 -40 c-16 8 -40 6 -64 4 z" fill="url(#capeShine)" opacity="0.35"/>
+  <path d="M120 190 q20 10 40 0" stroke="#B3212B" stroke-width="2" opacity="0.4"/>
+  <path d="M130 200 q20 10 40 0" stroke="#B3212B" stroke-width="2" opacity="0.4"/>
+  <path d="M115 186 q30 6 60 0" stroke="#fff" stroke-width="2" opacity="0.3"/>
+  <path d="M110 182 q60 30 120 0" stroke="#fff" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+</g>
+
+<!-- النجمة والحزام مع لمعان -->
+<g transform="translate(150,206)">
+  <circle r="12" fill="#FFD166" stroke="#E63946" stroke-width="2"/>
+  <circle r="2" fill="#FFF" opacity="0.6"/>
+  <polygon points="0,-8 2,-2 8,-2 3,1 4,7 0,4 -4,7 -3,1 -8,-2 -2,-2" fill="#fff"/>
+</g>
+<rect x="126" y="238" width="48" height="6" rx="3" fill="#E63946"/>
+<rect x="144" y="238" width="12" height="6" rx="2" fill="#FFD700" opacity="0.8"/>
+<path d="M126 238 q24 4 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+
+<!-- الساقين والحذاء مع ظل ولمعان -->
+<path d="M140 244 v48" stroke="#B71C1C" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+<path d="M160 244 v48" stroke="#B71C1C" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+<circle cx="140" cy="268" r="3" fill="#B71C1C" opacity="0.4"/>
+<circle cx="160" cy="268" r="3" fill="#B71C1C" opacity="0.4"/>
+<g>
+  <rect x="128" y="292" width="24" height="10" rx="4" fill="#6D4C41"/>
+  <rect x="148" y="292" width="24" height="10" rx="4" fill="#6D4C41"/>
+  <path d="M128 292 h24" stroke="#000" stroke-width="2" opacity="0.2"/>
+  <path d="M148 292 h24" stroke="#000" stroke-width="2" opacity="0.2"/>
+  <path d="M130 294 h20" stroke="#fff" stroke-width="1" opacity="0.3"/>
+  <path d="M150 294 h20" stroke="#fff" stroke-width="1" opacity="0.3"/>
+  <rect x="128" y="300" width="24" height="4" fill="#3E2723"/>
+  <rect x="148" y="300" width="24" height="4" fill="#3E2723"/>
+  <path d="M130 292 q10 4 20 0" stroke="#fff" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.3"/>
+  <path d="M150 292 q10 4 20 0" stroke="#fff" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.3"/>
+</g>
+
+<!-- الظل الأرضي -->
+<ellipse cx="150" cy="306" rx="46" ry="9" fill="#000" opacity="0.08"/>
 </svg>
 </div>
 <script>
