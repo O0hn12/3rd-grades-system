@@ -120,7 +120,7 @@ input:focus {
   </div>
   <!-- شخصية تفاعلية -->
 <div id="characterBox">
-  <img id="character" src="images/idle.png" alt="الشخصية" />
+  <img id="character" src="https://i.imgur.com/2RMz5wT.png" alt="الشخصية" />
 </div>
 </div>
 
@@ -173,11 +173,24 @@ function setCharacter(state) {
   const char = document.getElementById("character");
   char.className = ""; // reset
   switch(state) {
-    case "start": char.src = "images/happy.png"; char.classList.add("happy"); break;
-    case "typing": char.src = "images/thinking.png"; char.classList.add("typing"); break;
-    case "waiting": char.src = "images/excited.png"; char.classList.add("waiting"); break;
-    case "result": char.src = "images/clap.png"; char.classList.add("result"); break;
-    default: char.src = "images/idle.png";
+    case "start":
+      char.src = "https://i.imgur.com/2RMz5wT.png"; // happy
+      char.classList.add("happy");
+      break;
+    case "typing":
+      char.src = "https://i.imgur.com/1Q9Z1ZC.png"; // thinking
+      char.classList.add("typing");
+      break;
+    case "waiting":
+      char.src = "https://i.imgur.com/3g7Z1ZL.png"; // excited
+      char.classList.add("waiting");
+      break;
+    case "result":
+      char.src = "https://i.imgur.com/4g8Z1ZM.png"; // clap
+      char.classList.add("result");
+      break;
+    default:
+      char.src = "https://i.imgur.com/5g9Z1ZN.png"; // idle
   }
 }
 
