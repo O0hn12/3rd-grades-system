@@ -128,120 +128,46 @@ input:focus {
 </div>
 
 <!-- شخصية زيزو -->
-<div class="zizo" aria-label="شخصية زيزو">
- <svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zizo Superhero Kid Idle, hands on hips">
-  <defs>
-    <!-- درجات لنعومة البشرة والبدلة والكاب -->
-    <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFD9B0"/>
-      <stop offset="100%" stop-color="#FFC89A"/>
-    </linearGradient>
-    <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2A86C8"/>
-      <stop offset="100%" stop-color="#1E6EA8"/>
-    </linearGradient>
-    <linearGradient id="capeGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#E53945"/>
-      <stop offset="100%" stop-color="#C72832"/>
-    </linearGradient>
-  </defs>
-
-  <!-- الرأس (مجمّعة للحركة بالـ breath) -->
-  <g class="breath">
-    <!-- وجه -->
-    <path d="M150 76
-             c 28 0 48 20 48 45
-             c 0 25 -20 45 -48 45
-             c -28 0 -48 -20 -48 -45
-             c 0 -25 20 -45 48 -45 z"
-          fill="url(#skinGrad)" stroke="#CC3A3A" stroke-width="1.8"/>
-
-    <!-- شعر -->
-    <path d="M108 94
-             c 10 -18 30 -30 52 -30
-             c 26 0 44 12 52 28
-             c -12 -6 -26 -7 -36 -3
-             c -8 -8 -22 -12 -34 -12
-             c -16 0 -28 6 -34 17 z"
-          fill="#6D4C41"/>
-
-    <!-- قناع أحمر ناعم -->
-    <path d="M114 110 h72 a10 10 0 0 1 10 10 v14 a10 10 0 0 1 -10 10 h-72 a10 10 0 0 1 -10 -10 v-14 a10 10 0 0 1 10 -10 z"
-          fill="#D62828"/>
-
-    <!-- عينان + رمشة -->
-    <g class="blink">
-      <ellipse cx="136" cy="124" rx="8.5" ry="6.5" fill="#FFFFFF"/>
-      <ellipse cx="164" cy="124" rx="8.5" ry="6.5" fill="#FFFFFF"/>
-      <circle cx="136" cy="124" r="4" fill="#263238"/>
-      <circle cx="164" cy="124" r="4" fill="#263238"/>
-    </g>
-
-    <!-- خدود -->
-    <circle cx="132" cy="138" r="4" fill="#FFA6C1" opacity="0.9"/>
-    <circle cx="168" cy="138" r="4" fill="#FFA6C1" opacity="0.9"/>
-
-    <!-- فم -->
-    <path d="M132 144 Q150 152 168 144" stroke="#263238" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-  </g>
-
-  <!-- رقبة -->
-  <rect x="142" y="164" width="16" height="12" rx="4" fill="url(#skinGrad)"/>
-
-  <!-- الجذع (بدلة) بنسب بشرية -->
-  <path d="M116 176
-           c 0 -8 8 -14 18 -14 h32 c 10 0 18 6 18 14
-           v64 c 0 24 -18 44 -34 48
-           c -16 -4 -34 -24 -34 -48 z"
-        fill="url(#suitGrad)"/>
-
-  <!-- شعار الصدر (درع + نجمة) -->
-  <g transform="translate(150,206)">
-    <path d="M-18 -12 h36 v24 h-36 z" fill="#E63946"/>
-    <circle cx="0" cy="0" r="9.5" fill="#FFD166" stroke="#D62828" stroke-width="1.4"/>
-    <polygon points="0,-8 2,-2 8,-2 3,1 4,7 0,4 -4,7 -3,1 -8,-2 -2,-2" fill="#FFFFFF"/>
-  </g>
-
-  <!-- الكاب -->
-  <path d="M110 182
-           c -22 10 -32 26 -22 44
-           c 18 32 70 40 112 32
-           c 26 -5 36 -22 26 -40
-           c -12 -20 -32 -34 -52 -40
-           c -16 8 -40 6 -64 4 z"
-        fill="url(#capeGrad)" opacity="0.92"/>
-
-  <!-- الذراعان على الوسط (شكل آدمى) -->
-  <!-- الذراع اليسرى -->
-  <path d="M116 204
-           c -12 10 -18 22 -14 34
-           c 6 14 16 16 24 10
-           c 8 -6 14 -20 16 -28
-           c -10 6 -16 8 -26 -16 z"
-        fill="url(#skinGrad)"/>
-
-  <!-- الذراع اليمنى -->
-  <path d="M200 204
-           c 12 10 18 22 14 34
-           c -6 14 -16 16 -24 10
-           c -8 -6 -14 -20 -16 -28
-           c 10 6 16 8 26 -16 z"
-        fill="url(#skinGrad)"/>
-
-  <!-- خصر بسيط للفصل -->
-  <rect x="124" y="236" width="52" height="6" rx="3" fill="#173F5F" opacity="0.25"/>
-
-  <!-- الساقان أطول وأكثر آدمية -->
-  <path d="M140 242 v48" stroke="url(#skinGrad)" stroke-width="10" stroke-linecap="round"/>
-  <path d="M160 242 v48" stroke="url(#skinGrad)" stroke-width="10" stroke-linecap="round"/>
-
-  <!-- الحذاءان -->
-  <rect x="128" y="290" width="24" height="10" rx="4" fill="#6D4C41"/>
-  <rect x="148" y="290" width="24" height="10" rx="4" fill="#6D4C41"/>
-
-  <!-- ظل أرضي -->
-  <ellipse cx="150" cy="304" rx="46" ry="9" fill="#000000" opacity="0.08"/>
-</svg>
+<div class="zizo" aria-label="طفل سوبر هيرو كرتوني">
+  <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <!-- الرأس -->
+    <circle cx="100" cy="50" r="25" fill="#FFD9B0" class="breath"/>
+    
+    <!-- الشعر -->
+    <path d="M75 50 Q100 15 125 50 Q115 30 85 35 Z" fill="#6D4C41"/>
+    
+    <!-- القناع -->
+    <ellipse cx="100" cy="50" rx="18" ry="8" fill="#D62828" class="blink"/>
+    
+    <!-- العيون -->
+    <circle cx="92" cy="50" r="3" fill="#fff"/>
+    <circle cx="108" cy="50" r="3" fill="#fff"/>
+    <circle cx="92" cy="50" r="1.5" fill="#263238"/>
+    <circle cx="108" cy="50" r="1.5" fill="#263238"/>
+    
+    <!-- الفم -->
+    <path d="M92 60 Q100 65 108 60" stroke="#263238" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- الرقبة -->
+    <rect x="95" y="70" width="10" height="12" rx="2" fill="#FFD9B0"/>
+    
+    <!-- الجسم -->
+    <rect x="80" y="82" width="40" height="60" rx="8" fill="#2A86C8"/>
+    
+    <!-- الحزام -->
+    <rect x="80" y="120" width="40" height="8" fill="#FFD166"/>
+    
+    <!-- الأرجل -->
+    <rect x="80" y="140" width="15" height="50" fill="#2A86C8"/>
+    <rect x="105" y="140" width="15" height="50" fill="#2A86C8"/>
+    
+    <!-- الحذاء -->
+    <rect x="80" y="190" width="15" height="10" rx="3" fill="#6D4C41"/>
+    <rect x="105" y="190" width="15" height="10" rx="3" fill="#6D4C41"/>
+    
+    <!-- الكاب -->
+    <path d="M80 82 Q100 30 120 82" fill="#E53945" opacity="0.85"/>
+  </svg>
 </div>
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
