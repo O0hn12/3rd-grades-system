@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>points show</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.lordicon.com/lordicon.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <style>
 body {
   font-family: "Tajawal", sans-serif;
@@ -16,14 +15,13 @@ body {
   animation: gradientBG 15s ease infinite;
   display: flex; justify-content: center; align-items: center;
   height: 100vh; flex-direction: column;
-  overflow: hidden;
 }
 @keyframes gradientBG {
   0% {background-position: 0% 50%;}
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
-#welcome, #pointsPage { display: none; text-align: center; z-index: 2; }
+#welcome, #pointsPage { display: none; text-align: center; }
 h1 { font-size: 2.4em; color: #2d3436; text-shadow: 2px 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
 button {
   background: linear-gradient(45deg, #fd79a8, #e84393);
@@ -43,7 +41,9 @@ button:hover {
   width: 90%; max-width: 360px;
   box-sizing: border-box;
 }
-.container > * { margin-bottom: 16px; }
+.container > * {
+  margin-bottom: 16px;
+}
 input {
   width: 100%; padding: 14px;
   border: 1px solid #ccc; border-radius: 12px;
@@ -75,11 +75,10 @@ input:focus {
   transition: opacity 0.5s ease;
 }
 
-/* الشخصية */
 #characterBox {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 15px;
+  left: 15px;
   width: 150px;
   height: 150px;
   z-index: 1;
@@ -87,22 +86,10 @@ input:focus {
 }
 @keyframes floatAround {
   0% { transform: translate(0, 0); }
-  25% { transform: translate(60vw, -10vh); }
-  50% { transform: translate(40vw, 20vh); }
+  25% { transform: translate(50vw, -10vh); }
+  50% { transform: translate(30vw, 15vh); }
   75% { transform: translate(10vw, -15vh); }
   100% { transform: translate(0, 0); }
-}
-lord-icon {
-  width: 150px;
-  height: 150px;
-}
-
-@media (max-width: 480px) {
-  h1 { font-size: 1.8em; }
-  h2 { font-size: 1.4em; }
-  button { font-size: 1em; padding: 12px 20px; }
-  input, .suggestions div, #result { font-size: 1.1em; }
-  .container { padding: 20px 16px; }
 }
 </style>
 </head>
@@ -123,28 +110,31 @@ lord-icon {
     <button onclick="getPoints()">اعرض النتيجة</button>
     <div id="result"></div>
   </div>
-</div>
-
-<!-- الشخصية التفاعلية -->
-<div id="characterBox">
-  <lord-icon
-    id="character"
-    src="https://cdn.lordicon.com/bhfjfgqz.json"
-    trigger="loop"
-    delay="1000"
-    colors="primary:#ff7675,secondary:#6c5ce7"
-    style="width:150px;height:150px">
-  </lord-icon>
+  <!-- شخصية تفاعلية -->
+  <div id="characterBox">
+    <div id="character"></div>
+  </div>
 </div>
 
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
 let allNames = [];
+let characterAnim;
 
-// عرض صفحة البداية
-document.getElementById("welcome").style.display = "block";
+// تشغيل الأنيميشن الأول عند التحميل
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("welcome").style.display = "block";
+  characterAnim = lottie.loadAnimation({
+    container: document.getElementById("character"),
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "https://lottie.host/92f5826a-6158-40d5-9429-0a7de2ab1e2d/jOaZkODiyK.json" // ولد كرتوني مبتسم
+  });
+  loadNames();
+});
 
-// تحميل الأسماء من Cloudflare
+// تحميل أسماء الأطفال
 async function loadNames() {
   const cached = localStorage.getItem("allNames");
   if (cached) {
@@ -162,9 +152,8 @@ async function loadNames() {
     console.error("خطأ في تحميل الأسماء", err);
   }
 }
-window.addEventListener("DOMContentLoaded", loadNames);
 
-// إظهار الاقتراحات
+// اقتراح الأسماء أثناء الكتابة
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
   setCharacter("typing");
@@ -172,7 +161,7 @@ nameInput.addEventListener("input", () => {
   const box = document.getElementById("suggestions");
   box.innerHTML = "";
   if (!val) return;
-  const matches = allNames.filter(n => n.includes(val)).slice(0, 5);
+  const matches = allNames.filter(n => n.includes(val)).slice(0,5);
   matches.forEach(name => {
     const div = document.createElement("div");
     div.textContent = name;
@@ -181,25 +170,34 @@ nameInput.addEventListener("input", () => {
   });
 });
 
-// دالة تغيير حالة الشخصية
+// تغيير حالة الشخصية
 function setCharacter(state) {
-  const char = document.getElementById("character");
-  switch (state) {
+  if (!characterAnim) return;
+  let url = "";
+  switch(state) {
     case "start":
-      char.setAttribute("src", "https://cdn.lordicon.com/bhfjfgqz.json"); // فرحان
+      url = "https://lottie.host/92f5826a-6158-40d5-9429-0a7de2ab1e2d/jOaZkODiyK.json"; // فرحان
       break;
     case "typing":
-      char.setAttribute("src", "https://cdn.lordicon.com/puvaffet.json"); // بيفكر
+      url = "https://lottie.host/6f4dcfaf-4b9c-4a84-b5f9-0cb62b518b5e/8CuBD31nBj.json"; // بيفكر
       break;
     case "waiting":
-      char.setAttribute("src", "https://cdn.lordicon.com/ssvybplt.json"); // مستني
+      url = "https://lottie.host/ea70c3ee-9376-4a5e-981f-8037db7adbc2/CdbmE8Gtx9.json"; // مستني
       break;
     case "result":
-      char.setAttribute("src", "https://cdn.lordicon.com/uqpazftn.json"); // فرحان بالنتيجة
+      url = "https://lottie.host/6fdb71e9-d5ed-4a4f-9cda-1b6783e92cb8/9MvlM1FWhu.json"; // بيصفق
       break;
     default:
-      char.setAttribute("src", "https://cdn.lordicon.com/bhfjfgqz.json");
+      url = "https://lottie.host/92f5826a-6158-40d5-9429-0a7de2ab1e2d/jOaZkODiyK.json";
   }
+  characterAnim.destroy();
+  characterAnim = lottie.loadAnimation({
+    container: document.getElementById("character"),
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: url
+  });
 }
 
 // الانتقال لصفحة النقاط
