@@ -139,96 +139,105 @@ input:focus {
 </div>
 
 <!-- شخصية زيزو -->
-<div class="zizo" aria-label="زيزو سوبر هيرو مفصل جداً">
-<svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg">
+<div class="zizo" aria-label="طفل سوبر هيرو شبه 3D">
+<svg viewBox="0 0 900 1300" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+    <!-- البشرة مع إضاءة وظل -->
+    <radialGradient id="skin3D" cx="50%" cy="40%" r="50%">
       <stop offset="0%" stop-color="#FFD9B0"/>
-      <stop offset="100%" stop-color="#FFC89A"/>
-    </linearGradient>
-    <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="60%" stop-color="#FFC89A"/>
+      <stop offset="100%" stop-color="#E6B48D"/>
+    </radialGradient>
+    <!-- تدرج الشعر ثلاثي الأبعاد -->
+    <radialGradient id="hair3D" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#7B5E4D"/>
+      <stop offset="70%" stop-color="#4B3221"/>
+      <stop offset="100%" stop-color="#3A2515"/>
+    </radialGradient>
+    <!-- البدلة مع تأثير لمعان -->
+    <linearGradient id="suit3D" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#2A86C8"/>
-      <stop offset="100%" stop-color="#1E6EA8"/>
+      <stop offset="50%" stop-color="#1E6EA8"/>
+      <stop offset="100%" stop-color="#14528A"/>
     </linearGradient>
-    <linearGradient id="capeGrad" x1="0" y1="0" x2="1" y2="1">
+    <!-- الكاب مع عمق -->
+    <linearGradient id="cape3D" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#E53945"/>
-      <stop offset="100%" stop-color="#C72832"/>
+      <stop offset="60%" stop-color="#C72832"/>
+      <stop offset="100%" stop-color="#9B1F25"/>
     </linearGradient>
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.25"/>
-    </filter>
+    <!-- العيون مع لمعان -->
+    <radialGradient id="eye3D" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="50%" stop-color="#eee"/>
+      <stop offset="100%" stop-color="#666"/>
+    </radialGradient>
+    <!-- خدود ثلاثية الأبعاد -->
+    <radialGradient id="cheek3D" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFA6C1" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF7F9D" stop-opacity="0.3"/>
+    </radialGradient>
+    <!-- ظل أرضي -->
+    <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-
-  <!-- ظل الأرض -->
-  <ellipse cx="140" cy="370" rx="80" ry="18" fill="#000" opacity="0.15"/>
 
   <!-- الرأس -->
   <g class="breath">
-    <ellipse cx="140" cy="65" rx="38" ry="40" fill="url(#skinGrad)" stroke="#CC3A3A" stroke-width="1.5"/>
-    <!-- خدود -->
-    <circle cx="115" cy="65" r="4.5" fill="#FFA6C1" opacity="0.9"/>
-    <circle cx="165" cy="65" r="4.5" fill="#FFA6C1" opacity="0.9"/>
-    <!-- حاجبين -->
-    <path d="M118 52 Q140 42 162 52" stroke="#6D4C41" stroke-width="2.2" stroke-linecap="round"/>
-    <!-- رموش -->
-    <path d="M120 60 Q122 58 124 60" stroke="#263238" stroke-width="1.2"/>
-    <path d="M156 60 Q158 58 160 60" stroke="#263238" stroke-width="1.2"/>
-    <!-- الشعر بخصلات -->
-    <path d="M105 60 Q140 -5 175 60 Q158 35 122 45 Z" fill="#6D4C41"/>
-    <path d="M115 55 Q140 5 165 55" fill="#5C4033" opacity="0.3"/>
+    <ellipse cx="450" cy="240" rx="130" ry="140" fill="url(#skin3D)" stroke="#CC3A3A" stroke-width="4"/>
+    <circle cx="360" cy="240" r="14" fill="url(#cheek3D)"/>
+    <circle cx="540" cy="240" r="14" fill="url(#cheek3D)"/>
+    <!-- شعر 3D -->
+    <path d="M300 220 Q450 20 600 220 Q580 100 320 140 Z" fill="url(#hair3D)"/>
+    <path d="M320 220 Q450 25 580 220 Q560 120 340 140 Z" fill="url(#hair3D)"/>
     <!-- القناع -->
-    <ellipse cx="140" cy="65" rx="24" ry="11" fill="#D62828"/>
-    <!-- العيون -->
-    <circle cx="128" cy="65" r="4.5" fill="#fff"/>
-    <circle cx="152" cy="65" r="4.5" fill="#fff"/>
-    <circle cx="128" cy="65" r="2.2" fill="#263238"/>
-    <circle cx="152" cy="65" r="2.2" fill="#263238"/>
-    <!-- بريق العيون -->
-    <circle cx="127" cy="64" r="1" fill="#fff"/>
-    <circle cx="151" cy="64" r="1" fill="#fff"/>
-    <!-- الفم -->
-    <path d="M128 82 Q140 90 152 82" stroke="#263238" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <!-- الأنف -->
-    <path d="M140 66 Q137 70 140 70" stroke="#263238" stroke-width="1" fill="none"/>
+    <ellipse cx="450" cy="240" rx="75" ry="36" fill="#D62828"/>
+    <!-- العيون 3D -->
+    <ellipse cx="400" cy="240" rx="14" ry="18" fill="url(#eye3D)"/>
+    <ellipse cx="500" cy="240" rx="14" ry="18" fill="url(#eye3D)"/>
+    <circle cx="400" cy="240" r="7" fill="#263238"/>
+    <circle cx="500" cy="240" r="7" fill="#263238"/>
+    <path d="M380 210 Q400 195 420 210" stroke="#263238" stroke-width="5"/>
+    <path d="M480 210 Q500 195 520 210" stroke="#263238" stroke-width="5"/>
+    <path d="M450 260 Q440 270 450 270" stroke="#263238" stroke-width="3"/>
+    <path d="M400 290 Q450 310 500 290" stroke="#263238" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M440 230 Q450 235 460 230" stroke="#AA7777" stroke-width="1.5"/>
+    <path d="M430 250 Q450 255 470 250" stroke="#AA7777" stroke-width="1.5"/>
   </g>
 
   <!-- الرقبة -->
-  <rect x="135" y="100" width="12" height="16" rx="2" fill="url(#skinGrad)"/>
+  <rect x="425" y="370" width="50" height="36" rx="6" fill="url(#skin3D)"/>
 
   <!-- الجذع -->
-  <path d="M105 118 c0 -9 12 -17 20 -17 h48 c8 0 20 8 20 17 v72 c0 25 -20 43 -38 47 c-18 -4 -38 -22 -38 -47 z" fill="url(#suitGrad)" filter="url(#shadow)"/>
-  <!-- خطوط العضلات -->
-  <path d="M105 132 c20 -7 100 -7 100 0" stroke="#1E6EA8" stroke-width="2.2" fill="none"/>
-  <path d="M105 155 c20 -7 100 -7 100 0" stroke="#1E6EA8" stroke-width="2.2" fill="none"/>
-  <path d="M105 178 c20 -7 100 -7 100 0" stroke="#1E6EA8" stroke-width="2.2" fill="none"/>
+  <path d="M300 420 c0 -20 24 -40 48 -40 h200 c24 0 48 20 48 40 v220 c0 60 -48 110 -92 120 c-44 -10 -92 -60 -92 -120 z" fill="url(#suit3D)"/>
 
   <!-- شعار الصدر -->
-  <circle cx="140" cy="150" r="11" fill="#FFD166" stroke="#D62828" stroke-width="1.2"/>
-  <polygon points="140,140 148,150 158,150 150,158 152,166 140,160 128,166 130,158 122,150 132,150" fill="#fff"/>
+  <circle cx="450" cy="520" r="28" fill="#FFD166" stroke="#D62828" stroke-width="5"/>
+  <polygon points="450,490 472,520 500,520 476,540 484,576 450,550 416,576 424,540 400,520 428,520" fill="#fff"/>
 
   <!-- الكاب -->
-  <path class="cape" d="M105 118 Q140 50 175 118" fill="url(#capeGrad)" opacity="0.92"/>
+  <path class="cape" d="M300 420 Q450 80 600 420" fill="url(#cape3D)" opacity="0.95"/>
 
   <!-- الذراعان -->
   <g class="arms">
-    <!-- الذراع الأيسر -->
-    <path d="M105 118 c-11 11 -16 24 -14 38 c7 13 16 13 21 7 c5 -6 8 -15 10 -23 z" fill="url(#skinGrad)"/>
-    <path d="M92 150 l3 -6 l4 0 l2 6" stroke="#FFD9B0" stroke-width="1.5"/>
-    <!-- الذراع الأيمن -->
-    <path d="M175 118 c11 11 16 24 14 38 c-7 13 -16 13 -21 7 c-5 -6 -8 -15 -10 -23 z" fill="url(#skinGrad)"/>
-    <path d="M188 150 l-3 -6 l-4 0 l-2 6" stroke="#FFD9B0" stroke-width="1.5"/>
+    <path d="M300 420 c-24 24 -44 56 -36 96 c20 36 44 36 56 20 c12 -18 24 -40 30 -60 z" fill="url(#skin3D)"/>
+    <path d="M260 500 l6 -14 l8 0 l2 14" stroke="#FFD9B0" stroke-width="5"/>
+    <path d="M600 420 c24 24 44 56 36 96 c-20 36 -44 36 -56 20 c-12 -18 -24 -40 -30 -60 z" fill="url(#skin3D)"/>
+    <path d="M640 500 l-6 -14 l-8 0 l-2 14" stroke="#FFD9B0" stroke-width="5"/>
   </g>
 
   <!-- الأرجل -->
-  <path d="M120 182 v65 h18 v-65 z" fill="url(#suitGrad)"/>
-  <path d="M155 182 v65 h18 v-65 z" fill="url(#suitGrad)"/>
+  <path d="M370 640 v200 h50 v-200 z" fill="url(#suit3D)"/>
+  <path d="M480 640 v200 h50 v-200 z" fill="url(#suit3D)"/>
 
-  <!-- الحذاء -->
-  <rect x="120" y="247" width="18" height="12" rx="3" fill="#6D4C41"/>
-  <rect x="155" y="247" width="18" height="12" rx="3" fill="#6D4C41"/>
-  <!-- خطوط حذاء -->
-  <path d="M120 255 h18" stroke="#4E342E" stroke-width="1"/>
-  <path d="M155 255 h18" stroke="#4E342E" stroke-width="1"/>
+  <!-- الأحذية -->
+  <rect x="370" y="840" width="50" height="24" rx="8" fill="#6D4C41"/>
+  <rect x="480" y="840" width="50" height="24" rx="8" fill="#6D4C41"/>
+
+  <!-- ظل أرضي واقعي 3D -->
+  <ellipse cx="450" cy="880" rx="160" ry="40" fill="url(#groundShadow)"/>
 </svg>
 </div>
 <script>
