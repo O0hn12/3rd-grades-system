@@ -16,10 +16,9 @@ body {
   display: flex; justify-content: center; align-items: center;
   height: 100vh; flex-direction: column;
 }
-@keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+@keyframes walkRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100vw); }
 }
 #welcome, #pointsPage { display: none; text-align: center; }
 h1 { font-size: 2.4em; color: #2d3436; text-shadow: 2px 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
@@ -74,17 +73,15 @@ input:focus {
   color: #2d3436;
   transition: opacity 0.5s ease;
 }
-
 #characterBox {
   position: fixed;
   bottom: 15px;
-  left: 15px;
+  left: 0;
   width: 200px;
   height: 200px;
   z-index: 10;
-  animation: floatAround 25s linear infinite;
+  animation: walkRight 10s linear infinite;
 }
-
 #character {
   width: 100%;
   height: 100%;
@@ -130,12 +127,12 @@ let characterAnim;
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("welcome").style.display = "block";
   characterAnim = lottie.loadAnimation({
-    container: document.getElementById("character"),
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    path: "https://assets1.lottiefiles.com/packages/lf20_m6cuL6uZJj.json"
-  });
+  container: document.getElementById("character"),
+  renderer: "svg",
+  loop: true,
+  autoplay: true,
+  path: "https://lottie.host/4b2f5e7f-9e3e-4a7d-8e6f-3e2b9e2a1f3a/HappySuperhero.json"
+});
   loadNames();
 });
 
@@ -181,19 +178,19 @@ function setCharacter(state) {
   let url = "";
   switch(state) {
     case "start":
-      url = "https://assets2.lottiefiles.com/packages/lf20_1pxqjqps.json"; // happy
+      url = "https://lottie.host/4b2f5e7f-9e3e-4a7d-8e6f-3e2b9e2a1f3a/HappySuperhero.json"; // سوبرهيرو فرحان
       break;
     case "typing":
-      url = "https://assets9.lottiefiles.com/packages/lf20_tutvdkg0.json"; // typing
+      url = "https://lottie.host/3c1a6d2e-8b3e-4e2f-9c1e-7f2e6a3b9d2f/ThinkingSuperhero.json"; // بيفكر
       break;
     case "waiting":
-      url = "https://assets2.lottiefiles.com/packages/lf20_usmfx6bp.json"; // waiting
+      url = "https://lottie.host/5d3e2f1d-8b2a-4e3f-9d1e-6f3e7b2c8a1f/IdleSuperhero.json"; // مستني
       break;
     case "result":
-      url = "https://assets5.lottiefiles.com/packages/lf20_j1adxtyb.json"; // clap
+      url = "https://lottie.host/ff3a6d2e-9c3e-4e2f-8c1e-5f2e6a3b7d1f/ClapSuperhero.json"; // بيصفق
       break;
     default:
-      url = "https://assets1.lottiefiles.com/packages/lf20_9cyylh.json"; // idle
+      url = "https://lottie.host/c93c7c4e-8a2f-4e1f-9b1e-6f2e6a3b7d1f/IdleSuperhero.json"; // عادي
   }
   characterAnim.destroy();
   characterAnim = lottie.loadAnimation({
