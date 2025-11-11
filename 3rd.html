@@ -178,19 +178,19 @@ function setCharacter(state) {
   let url = "";
   switch(state) {
     case "start":
-      url = "https://assets2.lottiefiles.com/packages/lf20_1pxqjqps.json"; // Hi
+      url = "animations/hero_hi.json"; // نفس الشخصية - حركة Hi
       break;
     case "typing":
-      url = "https://assets9.lottiefiles.com/packages/lf20_tutvdkg0.json"; // Typing
+      url = "animations/hero_typing.json"; // نفس الشخصية - بيكتب
       break;
     case "waiting":
-      url = "https://assets2.lottiefiles.com/packages/lf20_usmfx6bp.json"; // Waiting
+      url = "animations/hero_waiting.json"; // نفس الشخصية - مستني
       break;
     case "result":
-      url = "https://assets5.lottiefiles.com/packages/lf20_j1adxtyb.json"; // Clap
+      url = "animations/hero_clap.json"; // نفس الشخصية - بيسقف
       break;
     default:
-      url = "https://assets1.lottiefiles.com/packages/lf20_9cyylh.json"; // Idle
+      url = "animations/hero_idle.json"; // نفس الشخصية - واقف عادي
   }
   characterAnim.destroy();
   characterAnim = lottie.loadAnimation({
