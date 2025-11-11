@@ -72,54 +72,22 @@ input:focus {
   transition: opacity 0.5s ease;
 }
 
-/* شخصية زيزو: الوضع الثابت */
+/* شخصية زيزو */
 .zizo{
   position:fixed; bottom:15px; left:15px; width:200px; height:200px; z-index:10;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
-  transition: transform 0.3s ease; /* لإضافة سلاسة عند تغيير الحالة */
 }
 .zizo svg{width:100%; height:100%}
-
-/* حركة النبض (Breathing) */
 .breath{animation:breath 2.8s ease-in-out infinite; transform-origin:50% 70%}
 @keyframes breath{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.02)}
 }
-
-/* حركة الرمش (Blinking) */
 .blink{animation:blink 4s ease-in-out infinite}
 @keyframes blink{
   0%,92%,100%{transform:scaleY(1)}
   94%{transform:scaleY(0.05)}
   96%{transform:scaleY(1)}
-}
-
-/* --- حالات التفاعل لزيزو --- */
-
-/* 1. حالة التفكير/الكتابة */
-.zizo.thinking {
-  transform: rotate(-5deg); /* يميل رأسه قليلاً */
-}
-
-/* 2. حالة الاحتفال بالنتيجة */
-.zizo.result {
-  animation: jump 0.6s ease-out; /* حركة لمرة واحدة */
-}
-@keyframes jump {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-30px) scale(1.05) rotate(5deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-/* 3. حالة الانتظار */
-.zizo.waiting .hand {
-  /* استخدام حركة الذراع لتعبر عن الانتظار */
-  animation: tapFoot 0.8s ease-in-out infinite alternate;
-}
-@keyframes tapFoot {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(5px); }
 }
 
 /* فقاعات */
@@ -139,13 +107,16 @@ input:focus {
 </head>
 <body>
 
+<!-- فقاعات خلفية -->
 <div class="float-layer" id="floatLayer"></div>
 
+<!-- الصفحة الترحيبية -->
 <div id="welcome">
   <h1>🎯 أهلاً بك 🎯</h1>
   <button onclick="goToPoints()">شوف نقاطك ⭐</button>
 </div>
 
+<!-- صفحة عرض النقاط -->
 <div id="pointsPage">
   <div class="container">
     <h2>شوف نقاطك ⭐</h2>
@@ -156,40 +127,52 @@ input:focus {
   </div>
 </div>
 
-<div class="zizo" aria-label="شخصية زيزو السوبر هيرو">
+<!-- شخصية زيزو -->
+<div class="zizo" aria-label="شخصية زيزو">
   <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zizo Superhero Human Idle">
-    <circle cx="110" cy="70" r="40" fill="#FFE0B2" stroke="#D62828" stroke-width="2" class="breath"/>
+  <!-- الرأس -->
+  <circle cx="110" cy="70" r="40" fill="#FFE0B2" stroke="#D62828" stroke-width="2" class="breath"/>
 
-    <path d="M70 60 Q110 20 150 60 Q140 40 110 40 Q80 40 70 60 Z" fill="#6D4C41"/>
+  <!-- شعر بني -->
+  <path d="M70 60 Q110 20 150 60 Q140 40 110 40 Q80 40 70 60 Z" fill="#6D4C41"/>
 
-    <path d="M75 55 H145 V80 H75 Z" fill="#D62828" rx="10"/>
+  <!-- قناع أحمر -->
+  <path d="M75 55 H145 V80 H75 Z" fill="#D62828" rx="10"/>
 
-    <g class="blink" id="eyes">
+  <!-- عينان داخل القناع + رمشة -->
+  <g class="blink">
     <circle cx="90" cy="67" r="8" fill="#FFFFFF"/>
     <circle cx="130" cy="67" r="8" fill="#FFFFFF"/>
     <circle cx="90" cy="67" r="4" fill="#263238"/>
     <circle cx="130" cy="67" r="4" fill="#263238"/>
   </g>
 
-    <path id="mouth" d="M85 90 Q110 105 135 90" stroke="#263238" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- فم مبتسم -->
+  <path d="M85 90 Q110 105 135 90" stroke="#263238" stroke-width="3" fill="none" stroke-linecap="round"/>
 
-    <rect x="70" y="110" width="80" height="50" rx="12" fill="#247BA0"/>
+  <!-- الجسم -->
+  <rect x="70" y="110" width="80" height="50" rx="12" fill="#247BA0"/>
 
-    <circle cx="110" cy="135" r="10" fill="#FFD166" stroke="#D62828" stroke-width="2"/>
+  <!-- شعار النجمة -->
+  <circle cx="110" cy="135" r="10" fill="#FFD166" stroke="#D62828" stroke-width="2"/>
   <polygon points="110,127 112,132 117,132 113,135 114,140 110,137 106,140 107,135 103,132 108,132" fill="#FFFFFF"/>
 
-    <path d="M60 110 Q40 130 60 150 Q110 160 160 150 Q180 130 160 110 Z" fill="#E63946" opacity="0.85"/>
+  <!-- كاب أحمر -->
+  <path d="M60 110 Q40 130 60 150 Q110 160 160 150 Q180 130 160 110 Z" fill="#E63946" opacity="0.85"/>
 
-    <g class="hand" transform="translate(160,100)">
+  <!-- يد مرفوعة بإصبع واحدة -->
+  <g transform="translate(160,100)">
     <path d="M0 0 C 10 -10, 16 -20, 18 -30" stroke="#FFE0B2" stroke-width="6" stroke-linecap="round" fill="none"/>
     <circle cx="18" cy="-32" r="6" fill="#FFE0B2" stroke="#D62828" stroke-width="1.5"/>
     <rect x="18" y="-50" width="5" height="18" rx="2.5" fill="#FFE0B2" stroke="#D62828" stroke-width="1.5"/>
   </g>
 
-    <rect x="80" y="160" width="16" height="8" rx="3" fill="#6D4C41"/>
+  <!-- قدمان -->
+  <rect x="80" y="160" width="16" height="8" rx="3" fill="#6D4C41"/>
   <rect x="124" y="160" width="16" height="8" rx="3" fill="#6D4C41"/>
 
-    <ellipse cx="110" cy="170" rx="28" ry="6" fill="#000000" opacity="0.08"/>
+  <!-- ظل خفيف -->
+  <ellipse cx="110" cy="170" rx="28" ry="6" fill="#000000" opacity="0.08"/>
 </svg>
 </div>
 <script>
@@ -198,115 +181,116 @@ let allNames = [];
 
 // تشغيل أول صفحة
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("welcome").style.display = "block";
-  loadNames();
+  document.getElementById("welcome").style.display = "block";
+  loadNames();
 });
 
 // تحميل أسماء الأطفال
 async function loadNames() {
-  const cached = localStorage.getItem("allNames");
-  if (cached) {
-    allNames = JSON.parse(cached);
-    return;
-  }
-  try {
-    const res = await fetch(apiURL + "load_names");
-    const data = await res.json();
-    if (data.names) {
-      allNames = data.names;
-      localStorage.setItem("allNames", JSON.stringify(allNames));
-    }
-  } catch (err) {
-    console.error("خطأ في تحميل الأسماء", err);
-  }
+  const cached = localStorage.getItem("allNames");
+  if (cached) {
+    allNames = JSON.parse(cached);
+    return;
+  }
+  try {
+    const res = await fetch(apiURL + "load_names");
+    const data = await res.json();
+    if (data.names) {
+      allNames = data.names;
+      localStorage.setItem("allNames", JSON.stringify(allNames));
+    }
+  } catch (err) {
+    console.error("خطأ في تحميل الأسماء", err);
+  }
 }
-  
+  
 // اقتراح الأسماء أثناء الكتابة
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
-  const val = nameInput.value.trim();
-  const box = document.getElementById("suggestions");
-  box.innerHTML = "";
-  if (!val) return;
-  const matches = allNames.filter(n => n.includes(val)).slice(0,5);
-  matches.forEach(name => {
-    const div = document.createElement("div");
-    div.textContent = name;
-    div.onclick = () => { nameInput.value = name; box.innerHTML = ""; };
-    box.appendChild(div);
-  });
+  const val = nameInput.value.trim();
+  const box = document.getElementById("suggestions");
+  box.innerHTML = "";
+  if (!val) return;
+  const matches = allNames.filter(n => n.includes(val)).slice(0,5);
+  matches.forEach(name => {
+    const div = document.createElement("div");
+    div.textContent = name;
+    div.onclick = () => { nameInput.value = name; box.innerHTML = ""; };
+    box.appendChild(div);
+  });
 });
 
 // الانتقال لصفحة النقاط
 function goToPoints() {
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("pointsPage").style.display = "block";
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("pointsPage").style.display = "block";
 }
 
 // جلب النقاط
 async function getPoints() {
-  const name = nameInput.value.trim();
-  const resultBox = document.getElementById("result");
-  if (!allNames.includes(name)) {
-    resultBox.innerText = "❌ الاسم غير مسجل";
-    return;
-  }
-  const res = await fetch(apiURL + encodeURIComponent(name));
-  const data = await res.json();
-  if (data.error) {
-    resultBox.innerText = data.error;
-  } else {
-    resultBox.style.opacity = 0;
-    setTimeout(() => {
-      resultBox.innerHTML = `
-        👤 الاسم: ${data.name}<br>
-        ⭐ النقاط الكلية: ${data.total}<br>
-        🎁 النقاط المستخدمة: ${data.used}<br>
-        ➖ النقاط المخصومة: ${data.minus}<br>
-        🏆 <strong>المحصلة النهائية: ${data.final}</strong>
-      `;
-      resultBox.style.opacity = 1;
-    }, 200);
-  }
+  const name = nameInput.value.trim();
+  const resultBox = document.getElementById("result");
+  if (!allNames.includes(name)) {
+    resultBox.innerText = "❌ الاسم غير مسجل";
+    return;
+  }
+  const res = await fetch(apiURL + encodeURIComponent(name));
+  const data = await res.json();
+  if (data.error) {
+    resultBox.innerText = data.error;
+  } else {
+    resultBox.style.opacity = 0;
+    setTimeout(() => {
+      resultBox.innerHTML = `
+        👤 الاسم: ${data.name}<br>
+        ⭐ النقاط الكلية: ${data.total}<br>
+        🎁 النقاط المستخدمة: ${data.used}<br>
+        ➖ النقاط المخصومة: ${data.minus}<br>
+        🏆 <strong>المحصلة النهائية: ${data.final}</strong>
+      `;
+      resultBox.style.opacity = 1;
+    }, 200);
+  }
 }
 
 // تولد فقاعات عشوائية
 const layer = document.getElementById('floatLayer');
 for(let i=0;i<24;i++){
-  const b=document.createElement('div');
-  b.className='bubble';
-  b.style.left=Math.random()*100+'vw';
-  b.style.animationDuration=(10+Math.random()*12)+'s';
-  b.style.animationDelay=(Math.random()*5)+'s';
-  b.style.opacity=0.6+Math.random()*0.4;
-  layer.appendChild(b);
+  const b=document.createElement('div');
+  b.className='bubble';
+  b.style.left=Math.random()*100+'vw';
+  b.style.animationDuration=(10+Math.random()*12)+'s';
+  b.style.animationDelay=(Math.random()*5)+'s';
+  b.style.opacity=0.6+Math.random()*0.4;
+  layer.appendChild(b);
 }
 
 // زر احتفال: كونفيتي
 document.addEventListener('keydown', (e)=>{
-  if(e.key==="Enter"){celebrate();}
+  if(e.key==="Enter"){celebrate();}
 });
 function celebrate(){
-  for(let i=0;i<40;i++){
-    const conf=document.createElement('div');
-    conf.style.position='fixed';
-    conf.style.left=Math.random()*100+'vw';
-    conf.style.top='-10vh';
-    conf.style.width='10px';
-    conf.style.height='16px';
-    conf.style.background=['#FF6B6B','#2EC4B6','#FFA6C1','#FFD166'][Math.floor(Math.random()*4)];
-    conf.style.transform=`rotate(${Math.random()*360}deg)`;
-    conf.style.zIndex=4;
-    conf.style.borderRadius='3px';
-    conf.style.boxShadow='0 2px 6px rgba(0,0,0,0.2)';
-    document.body.appendChild(conf);
-    const duration=8+Math.random()*6;
-    conf.animate([
-      { transform: conf.style.transform, top: '-10vh', opacity: 1 },
-      { transform: `translateY(100vh) rotate(${Math.random()*360}deg)`, top: '100vh', opacity: 0.8 }
-    ], { duration: duration*1000, easing: 'cubic-bezier(.25,.8,.25,1)' }).onfinish=()=>conf.remove();
-  }
+  for(let i=0;i<40;i++){
+    const conf=document.createElement('div');
+    conf.style.position='fixed';
+    conf.style.left=Math.random()*100+'vw';
+    conf.style.top='-10vh';
+    conf.style.width='10px';
+    conf.style.height='16px';
+    conf.style.background=['#FF6B6B','#2EC4B6','#FFA6C1','#FFD166'][Math.floor(Math.random()*4)];
+    conf.style.transform=`rotate(${Math.random()*360}deg)`;
+    conf.style.zIndex=4;
+    conf.style.borderRadius='3px';
+    conf.style.boxShadow='0 2px 6px rgba(0,0,0,0.2)';
+    document.body.appendChild(conf);
+    const duration=8+Math.random()*6;
+    conf.animate([
+      { transform: conf.style.transform, top: '-10vh', opacity: 1 },
+      { transform: `translateY(100vh) rotate(${Math.random()*360}deg)`, top: '100vh', opacity: 0.8 }
+    ], { duration: duration*1000, easing: 'cubic-bezier(.25,.8,.25,1)' }).onfinish=()=>conf.remove();
+  }
 }
 </script>
 </body>
 </html>
+تقدل تعمل شخصية احلى و تبعت ال svg بتاعها احطه هنا؟؟؟
