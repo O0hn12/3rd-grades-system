@@ -114,6 +114,15 @@ input:focus {
   0%,100%{transform:translateY(0) rotate(0deg)}
   50%{transform:translateY(-2px) rotate(2deg)}
 }
+  .zizo img {
+  width: 200px; height: auto;
+  animation: breath 3s ease-in-out infinite;
+  transform-origin: 50% 70%;
+}
+@keyframes breath {
+  0%,100%{ transform: scale(1);}
+  50%{ transform: scale(1.02);}
+}
 </style>
 </head>
 <body>
@@ -139,128 +148,8 @@ input:focus {
 </div>
 
 <!-- شخصية زيزو -->
-<div class="zizo" aria-label="طفل سوبر هيرو واقعي جدًا">
-<svg viewBox="0 0 900 1300" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- البشرة مع إضاءة -->
-    <radialGradient id="skinLight" cx="45%" cy="35%" r="60%">
-      <stop offset="0%" stop-color="#FFE0C8"/>
-      <stop offset="100%" stop-color="#FFBFA0"/>
-    </radialGradient>
-    <radialGradient id="skinShadow" cx="55%" cy="65%" r="70%">
-      <stop offset="0%" stop-color="#FFCB9A" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#D49A7F" stop-opacity="0.4"/>
-    </radialGradient>
-
-    <!-- الشعر -->
-    <radialGradient id="hairGrad" cx="50%" cy="25%" r="70%">
-      <stop offset="0%" stop-color="#5C3A2E"/>
-      <stop offset="100%" stop-color="#3F2A1F"/>
-    </radialGradient>
-
-    <!-- العيون -->
-    <radialGradient id="eyeGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#fff"/>
-      <stop offset="100%" stop-color="#bbb"/>
-    </radialGradient>
-    <radialGradient id="pupilGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#263238"/>
-      <stop offset="100%" stop-color="#000"/>
-    </radialGradient>
-
-    <!-- البدلة -->
-    <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2A86C8"/>
-      <stop offset="100%" stop-color="#1E6EA8"/>
-    </linearGradient>
-
-    <!-- الكاب -->
-    <linearGradient id="capeGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#E53945"/>
-      <stop offset="100%" stop-color="#C72832"/>
-    </linearGradient>
-
-    <!-- خدود -->
-    <radialGradient id="cheekGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFA6C1" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#FF7F9D" stop-opacity="0.3"/>
-    </radialGradient>
-
-    <!-- ظل أرضي -->
-    <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#000" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-
-  <!-- الرأس -->
-  <g class="breath">
-    <ellipse cx="450" cy="240" rx="130" ry="140" fill="url(#skinLight)" stroke="#CC3A3A" stroke-width="4"/>
-    <ellipse cx="450" cy="240" rx="130" ry="140" fill="url(#skinShadow)"/>
-    
-    <!-- خدود -->
-    <circle cx="360" cy="240" r="14" fill="url(#cheekGrad)"/>
-    <circle cx="540" cy="240" r="14" fill="url(#cheekGrad)"/>
-
-    <!-- الشعر -->
-    <path d="M300 220 Q450 20 600 220 Q580 100 320 140 Z" fill="url(#hairGrad)"/>
-    <path d="M320 220 Q450 25 580 220 Q560 120 340 140 Z" fill="#6D4C41"/>
-
-    <!-- القناع -->
-    <ellipse cx="450" cy="240" rx="75" ry="36" fill="#D62828"/>
-
-    <!-- العيون -->
-    <ellipse cx="400" cy="240" rx="16" ry="20" fill="url(#eyeGrad)"/>
-    <ellipse cx="500" cy="240" rx="16" ry="20" fill="url(#eyeGrad)"/>
-    <circle cx="400" cy="240" r="7" fill="url(#pupilGrad)"/>
-    <circle cx="500" cy="240" r="7" fill="url(#pupilGrad)"/>
-
-    <!-- الحاجبين -->
-    <path d="M380 210 Q400 190 420 210" stroke="#263238" stroke-width="5"/>
-    <path d="M480 210 Q500 190 520 210" stroke="#263238" stroke-width="5"/>
-
-    <!-- الأنف والفم -->
-    <path d="M450 260 Q440 270 450 270" stroke="#263238" stroke-width="3"/>
-    <path d="M400 290 Q450 310 500 290" stroke="#263238" stroke-width="4" fill="none" stroke-linecap="round"/>
-    
-    <!-- تفاصيل دقيقة الوجه -->
-    <path d="M440 230 Q450 235 460 230" stroke="#AA7777" stroke-width="1.5"/>
-    <path d="M430 250 Q450 255 470 250" stroke="#AA7777" stroke-width="1.5"/>
-  </g>
-
-  <!-- الرقبة -->
-  <rect x="425" y="370" width="50" height="36" rx="6" fill="url(#skinLight)"/>
-  <rect x="425" y="370" width="50" height="36" rx="6" fill="url(#skinShadow)"/>
-
-  <!-- الجذع -->
-  <path d="M300 420 c0 -20 24 -40 48 -40 h200 c24 0 48 20 48 40 v220 c0 60 -48 110 -92 120 c-44 -10 -92 -60 -92 -120 z" fill="url(#suitGrad)"/>
-
-  <!-- شعار الصدر -->
-  <circle cx="450" cy="520" r="28" fill="#FFD166" stroke="#D62828" stroke-width="5"/>
-  <polygon points="450,490 472,520 500,520 476,540 484,576 450,550 416,576 424,540 400,520 428,520" fill="#fff"/>
-
-  <!-- الكاب -->
-  <path class="cape" d="M300 420 Q450 80 600 420" fill="url(#capeGrad)" opacity="0.95"/>
-
-  <!-- الذراعان -->
-  <g class="arms">
-    <path d="M300 420 c-24 24 -44 56 -36 96 c20 36 44 36 56 20 c12 -18 24 -40 30 -60 z" fill="url(#skinLight)"/>
-    <path d="M260 500 l6 -14 l8 0 l2 14" stroke="#FFD9B0" stroke-width="5"/>
-    <path d="M600 420 c24 24 44 56 36 96 c-20 36 -44 36 -56 20 c-12 -18 -24 -40 -30 -60 z" fill="url(#skinLight)"/>
-    <path d="M640 500 l-6 -14 l-8 0 l-2 14" stroke="#FFD9B0" stroke-width="5"/>
-  </g>
-
-  <!-- الأرجل -->
-  <path d="M370 640 v200 h50 v-200 z" fill="url(#suitGrad)"/>
-  <path d="M480 640 v200 h50 v-200 z" fill="url(#suitGrad)"/>
-
-  <!-- الأحذية -->
-  <rect x="370" y="840" width="50" height="24" rx="8" fill="#6D4C41"/>
-  <rect x="480" y="840" width="50" height="24" rx="8" fill="#6D4C41"/>
-
-  <!-- ظل أرضي واقعي -->
-  <ellipse cx="450" cy="880" rx="160" ry="40" fill="url(#groundShadow)"/>
-</svg>
+<div class="zizo">
+  <img src="https://i.ibb.co/0y4ZrWFc/Copilot-20251111-165610.png" alt="زيزو" />
 </div>
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
