@@ -72,23 +72,57 @@ input:focus {
   transition: opacity 0.5s ease;
 }
 
-/* شخصية زيزو */
+/* شخصية زيزو: الوضع الثابت */
 .zizo{
   position:fixed; bottom:15px; left:15px; width:200px; height:200px; z-index:10;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
+  transition: transform 0.3s ease; /* لإضافة سلاسة عند تغيير الحالة */
 }
 .zizo svg{width:100%; height:100%}
+
+/* حركة النبض (Breathing) */
 .breath{animation:breath 2.8s ease-in-out infinite; transform-origin:50% 70%}
 @keyframes breath{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.02)}
 }
+
+/* حركة الرمش (Blinking) */
 .blink{animation:blink 4s ease-in-out infinite}
 @keyframes blink{
   0%,92%,100%{transform:scaleY(1)}
   94%{transform:scaleY(0.05)}
   96%{transform:scaleY(1)}
 }
+
+/* --- حالات التفاعل لزيزو --- */
+
+/* 1. حالة التفكير/الكتابة */
+.zizo.thinking {
+  transform: rotate(-5deg); /* يميل رأسه قليلاً */
+}
+
+/* 2. حالة الاحتفال بالنتيجة */
+.zizo.result {
+  animation: jump 0.6s ease-out; /* حركة لمرة واحدة */
+  transform-origin: bottom;
+}
+@keyframes jump {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) scale(1.05) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* 3. حالة الانتظار */
+.zizo.waiting .hand-arm {
+  /* حركة الذراع لتعبر عن الانتظار */
+  animation: tapFoot 0.8s ease-in-out infinite alternate;
+}
+@keyframes tapFoot {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(5px); }
+}
+
 
 /* فقاعات */
 .float-layer{position:fixed;inset:0;pointer-events:none;z-index:1}
@@ -107,16 +141,13 @@ input:focus {
 </head>
 <body>
 
-<!-- فقاعات خلفية -->
 <div class="float-layer" id="floatLayer"></div>
 
-<!-- الصفحة الترحيبية -->
 <div id="welcome">
   <h1>🎯 أهلاً بك 🎯</h1>
   <button onclick="goToPoints()">شوف نقاطك ⭐</button>
 </div>
 
-<!-- صفحة عرض النقاط -->
 <div id="pointsPage">
   <div class="container">
     <h2>شوف نقاطك ⭐</h2>
@@ -127,61 +158,93 @@ input:focus {
   </div>
 </div>
 
-<!-- شخصية زيزو -->
-<div class="zizo" aria-label="شخصية زيزو">
+<div class="zizo" aria-label="شخصية زيزو السوبر هيرو">
   <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zizo Superhero Human Idle">
-  <!-- الرأس -->
-  <circle cx="110" cy="70" r="40" fill="#FFE0B2" stroke="#D62828" stroke-width="2" class="breath"/>
+    <circle cx="110" cy="70" r="40" fill="#FFE0B2" stroke="#D62828" stroke-width="2" class="breath"/>
 
-  <!-- شعر بني -->
-  <path d="M70 60 Q110 20 150 60 Q140 40 110 40 Q80 40 70 60 Z" fill="#6D4C41"/>
+    <path d="M70 60 Q110 20 150 60 Q140 40 110 40 Q80 40 70 60 Z" fill="#6D4C41"/>
 
-  <!-- قناع أحمر -->
-  <path d="M75 55 H145 V80 H75 Z" fill="#D62828" rx="10"/>
+    <path d="M75 55 H145 V80 H75 Z" fill="#D62828" rx="10"/>
 
-  <!-- عينان داخل القناع + رمشة -->
-  <g class="blink">
+    <g class="blink" id="eyes">
     <circle cx="90" cy="67" r="8" fill="#FFFFFF"/>
     <circle cx="130" cy="67" r="8" fill="#FFFFFF"/>
     <circle cx="90" cy="67" r="4" fill="#263238"/>
     <circle cx="130" cy="67" r="4" fill="#263238"/>
   </g>
 
-  <!-- فم مبتسم -->
-  <path d="M85 90 Q110 105 135 90" stroke="#263238" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path id="mouth" d="M85 90 Q110 105 135 90" stroke="#263238" stroke-width="3" fill="none" stroke-linecap="round"/>
 
-  <!-- الجسم -->
-  <rect x="70" y="110" width="80" height="50" rx="12" fill="#247BA0"/>
+    <rect x="70" y="110" width="80" height="50" rx="12" fill="#247BA0"/>
 
-  <!-- شعار النجمة -->
-  <circle cx="110" cy="135" r="10" fill="#FFD166" stroke="#D62828" stroke-width="2"/>
+    <circle cx="110" cy="135" r="10" fill="#FFD166" stroke="#D62828" stroke-width="2"/>
   <polygon points="110,127 112,132 117,132 113,135 114,140 110,137 106,140 107,135 103,132 108,132" fill="#FFFFFF"/>
 
-  <!-- كاب أحمر -->
-  <path d="M60 110 Q40 130 60 150 Q110 160 160 150 Q180 130 160 110 Z" fill="#E63946" opacity="0.85"/>
+    <path d="M60 110 Q40 130 60 150 Q110 160 160 150 Q180 130 160 110 Z" fill="#E63946" opacity="0.85"/>
 
-  <!-- يد مرفوعة بإصبع واحدة -->
-  <g transform="translate(160,100)">
+    <g class="hand-arm" transform="translate(160,100)">
     <path d="M0 0 C 10 -10, 16 -20, 18 -30" stroke="#FFE0B2" stroke-width="6" stroke-linecap="round" fill="none"/>
     <circle cx="18" cy="-32" r="6" fill="#FFE0B2" stroke="#D62828" stroke-width="1.5"/>
     <rect x="18" y="-50" width="5" height="18" rx="2.5" fill="#FFE0B2" stroke="#D62828" stroke-width="1.5"/>
   </g>
 
-  <!-- قدمان -->
-  <rect x="80" y="160" width="16" height="8" rx="3" fill="#6D4C41"/>
+    <rect x="80" y="160" width="16" height="8" rx="3" fill="#6D4C41"/>
   <rect x="124" y="160" width="16" height="8" rx="3" fill="#6D4C41"/>
 
-  <!-- ظل خفيف -->
-  <ellipse cx="110" cy="170" rx="28" ry="6" fill="#000000" opacity="0.08"/>
+    <ellipse cx="110" cy="170" rx="28" ry="6" fill="#000000" opacity="0.08"/>
 </svg>
 </div>
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
 let allNames = [];
 
+// متغيرات التحكم في الشخصية
+const zizoElement = document.querySelector('.zizo');
+const nameInput = document.getElementById("nameInput");
+
+// دالة التحكم في حالة زيزو (Idle, Thinking, Waiting, Result)
+function setZizoState(state) {
+  // أولاً: إزالة جميع الأصناف التفاعلية والخاصة بالحالة
+  zizoElement.className = 'zizo';
+
+  // ثانياً: إضافة صنف الحالة الجديد
+  if (state !== 'idle') {
+    zizoElement.classList.add(state);
+  }
+
+  // ثالثاً: تحديث تعابير الوجه داخل SVG
+  const mouth = document.getElementById('mouth');
+  const eyes = document.getElementById('eyes');
+  
+  if (mouth) {
+    // إعادة تعيين تعبير الفم
+    mouth.setAttribute('d', 'M85 90 Q110 105 135 90');
+    mouth.style.stroke = '#263238';
+
+    if (state === 'thinking') {
+      // تغيير الفم ليعبر عن الحيرة أو التركيز
+      mouth.setAttribute('d', 'M85 95 L135 95'); // خط مستقيم
+      mouth.style.stroke = '#E63946';
+    } else if (state === 'result') {
+      // فم واسع تعبيراً عن السعادة
+      mouth.setAttribute('d', 'M85 90 Q110 120 135 90');
+    }
+  }
+  
+  if (eyes) {
+    // إيقاف الرمشة عند التفاعل النشط
+    eyes.classList.remove('blink');
+    if (state === 'idle') {
+      eyes.classList.add('blink');
+    }
+  }
+}
+
+
 // تشغيل أول صفحة
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("welcome").style.display = "block";
+  setZizoState("idle"); // تعيين زيزو في وضع الخمول عند البدء
   loadNames();
 });
 
@@ -205,8 +268,8 @@ async function loadNames() {
 }
   
 // اقتراح الأسماء أثناء الكتابة
-const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
+  setZizoState("thinking"); // زيزو يفكر أثناء الكتابة
   const val = nameInput.value.trim();
   const box = document.getElementById("suggestions");
   box.innerHTML = "";
@@ -215,7 +278,7 @@ nameInput.addEventListener("input", () => {
   matches.forEach(name => {
     const div = document.createElement("div");
     div.textContent = name;
-    div.onclick = () => { nameInput.value = name; box.innerHTML = ""; };
+    div.onclick = () => { nameInput.value = name; box.innerHTML = ""; setZizoState("idle");};
     box.appendChild(div);
   });
 });
@@ -224,20 +287,24 @@ nameInput.addEventListener("input", () => {
 function goToPoints() {
   document.getElementById("welcome").style.display = "none";
   document.getElementById("pointsPage").style.display = "block";
+  setZizoState("idle"); // زيزو يعود لحالة الخمول بعد الانتقال
 }
 
 // جلب النقاط
 async function getPoints() {
+  setZizoState("waiting"); // زيزو في حالة انتظار أثناء جلب البيانات
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
   if (!allNames.includes(name)) {
     resultBox.innerText = "❌ الاسم غير مسجل";
+    setZizoState("thinking"); // يعود لحالة التفكير بعد خطأ
     return;
   }
   const res = await fetch(apiURL + encodeURIComponent(name));
   const data = await res.json();
   if (data.error) {
     resultBox.innerText = data.error;
+    setZizoState("thinking"); // يعود لحالة التفكير بعد خطأ
   } else {
     resultBox.style.opacity = 0;
     setTimeout(() => {
@@ -249,6 +316,8 @@ async function getPoints() {
         🏆 <strong>المحصلة النهائية: ${data.final}</strong>
       `;
       resultBox.style.opacity = 1;
+      setZizoState("result"); // زيزو يقفز فرحاً بالنتيجة
+      celebrate(); // تشغيل الكونفيتي
     }, 200);
   }
 }
@@ -293,4 +362,3 @@ function celebrate(){
 </script>
 </body>
 </html>
-تقدل تعمل شخصية احلى و تبعت ال svg بتاعها احطه هنا؟؟؟
