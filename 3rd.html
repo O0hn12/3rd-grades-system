@@ -73,22 +73,13 @@ input:focus {
 }
 
 /* شخصية زيزو */
-.zizo{
-  position:fixed; bottom:15px; left:15px; width:200px; height:200px; z-index:10;
+.zizo {
+  position: fixed; bottom: 10px; left: 10px;
+  width: 220px; height: 220px;
+  z-index: 10;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
 }
-.zizo svg{width:100%; height:100%}
-.breath{animation:breath 2.8s ease-in-out infinite; transform-origin:50% 70%}
-@keyframes breath{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-}
-.blink{animation:blink 4s ease-in-out infinite}
-@keyframes blink{
-  0%,92%,100%{transform:scaleY(1)}
-  94%{transform:scaleY(0.05)}
-  96%{transform:scaleY(1)}
-}
+.zizo svg { width: 100%; height: 100%; }
 
 /* فقاعات */
 .float-layer{position:fixed;inset:0;pointer-events:none;z-index:1}
@@ -103,26 +94,6 @@ input:focus {
   10%{opacity:1}
   100%{transform:translateY(-20vh) scale(1.2); opacity:0}
 }
-  .breath{animation:breath 3s ease-in-out infinite; transform-origin:50% 70%}
-@keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
-
-.blink{animation:blink 4s ease-in-out infinite}
-@keyframes blink{0%,92%,100%{transform:scaleY(1)}94%{transform:scaleY(0.05)}96%{transform:scaleY(1)}}
-
-.cape{animation:capeSwing 2.5s ease-in-out infinite}
-@keyframes capeSwing{
-  0%,100%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-2px) rotate(2deg)}
-}
-  .zizo img {
-  width: 200px; height: auto;
-  animation: breath 3s ease-in-out infinite;
-  transform-origin: 50% 70%;
-}
-@keyframes breath {
-  0%,100%{ transform: scale(1);}
-  50%{ transform: scale(1.02);}
-}
 </style>
 </head>
 <body>
@@ -136,7 +107,7 @@ input:focus {
   <button onclick="goToPoints()">شوف نقاطك ⭐</button>
 </div>
 
-  <!-- صفحة عرض النقاط -->
+<!-- صفحة عرض النقاط -->
 <div id="pointsPage">
   <div class="container">
     <h2>شوف نقاطك ⭐</h2>
@@ -148,9 +119,10 @@ input:focus {
 </div>
 
 <!-- شخصية زيزو -->
-<div class="zizo">
-  <img src="https://i.ibb.co/0y4ZrWFc/Copilot-20251111-165610.png" alt="زيزو" />
-</div>
+<div class="zizo" id="zizoHero"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
 let allNames = [];
@@ -159,6 +131,8 @@ let allNames = [];
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("welcome").style.display = "block";
   loadNames();
+  initZizo();
+  generateBubbles();
 });
 
 // تحميل أسماء الأطفال
@@ -179,7 +153,7 @@ async function loadNames() {
     console.error("خطأ في تحميل الأسماء", err);
   }
 }
-  
+
 // اقتراح الأسماء أثناء الكتابة
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
@@ -229,19 +203,32 @@ async function getPoints() {
   }
 }
 
-// تولد فقاعات عشوائية
-const layer = document.getElementById('floatLayer');
-for(let i=0;i<24;i++){
-  const b=document.createElement('div');
-  b.className='bubble';
-  b.style.left=Math.random()*100+'vw';
-  b.style.animationDuration=(10+Math.random()*12)+'s';
-  b.style.animationDelay=(Math.random()*5)+'s';
-  b.style.opacity=0.6+Math.random()*0.4;
-  layer.appendChild(b);
+// فقاعات متحركة
+function generateBubbles() {
+  const layer = document.getElementById('floatLayer');
+  for(let i=0;i<24;i++){
+    const b=document.createElement('div');
+    b.className='bubble';
+    b.style.left=Math.random()*100+'vw';
+    b.style.animationDuration=(10+Math.random()*12)+'s';
+    b.style.animationDelay=(Math.random()*5)+'s';
+    b.style.opacity=0.6+Math.random()*0.4;
+    layer.appendChild(b);
+  }
 }
 
-// زر احتفال: كونفيتي
+// شخصية زيزو المتحركة
+function initZizo() {
+  lottie.loadAnimation({
+    container: document.getElementById('zizoHero'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'https://lottie.host/14f61a9b-8a9f-4b3f-8e03-d3a9ebcc4582/TX3YokL6uK.json' // أنميشن طفل سوبرهيرو متحرك
+  });
+}
+
+// احتفال بالنتيجة (كونفيتي)
 document.addEventListener('keydown', (e)=>{
   if(e.key==="Enter"){celebrate();}
 });
