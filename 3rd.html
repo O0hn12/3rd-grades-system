@@ -284,6 +284,35 @@ input:focus {
       <rect x="148" y="300" width="24" height="4" fill="#3E2723"/>
     </g>
 
+    <!-- الجسم بالكامل -->
+<g id="body">
+  <!-- البدلة -->
+  <path d="M118 178 c0 -8 8 -14 18 -14 h28 c10 0 18 6 18 14
+           v64 c0 26 -18 46 -32 50 c-16 -4 -32 -24 -32 -50 z"
+        fill="url(#suitGrad)"/>
+
+  <!-- تدرجات وظلال -->
+  <path d="M130 190 q10 6 20 0" stroke="#1B4F72" stroke-width="1.2" opacity="0.3"/>
+  <path d="M130 210 q10 6 20 0" stroke="#1B4F72" stroke-width="1.2" opacity="0.3"/>
+  <path d="M126 178 q24 12 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+
+  <!-- خياطة جانبية -->
+  <path d="M118 178 v64" stroke="#fff" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.3"/>
+  <path d="M182 178 v64" stroke="#fff" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.3"/>
+
+  <!-- الحزام -->
+  <rect x="126" y="238" width="48" height="6" rx="3" fill="#E63946"/>
+  <rect x="144" y="238" width="12" height="6" rx="2" fill="#FFD700" opacity="0.8"/>
+  <path d="M126 238 q24 4 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
+
+  <!-- الساقان -->
+  <path d="M140 244 v48" stroke="#D62828" stroke-width="10" stroke-linecap="round"/>
+  <path d="M160 244 v48" stroke="#D62828" stroke-width="10" stroke-linecap="round"/>
+  <!-- مفاصل الركبة -->
+  <circle cx="140" cy="268" r="3" fill="#B71C1C" opacity="0.4"/>
+  <circle cx="160" cy="268" r="3" fill="#B71C1C" opacity="0.4"/>
+</g>
+
     <!-- ظل أرضي -->
     <ellipse cx="150" cy="306" rx="46" ry="9" fill="#000" opacity="0.08"/>
   </svg>
@@ -296,7 +325,6 @@ let allNames = [];
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("welcome").style.display = "block";
   loadNames();
-  initZizo();
   generateBubbles();
 });
 
