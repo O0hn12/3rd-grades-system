@@ -134,7 +134,7 @@ window.addEventListener("DOMContentLoaded", () => {
     renderer: "svg",
     loop: true,
     autoplay: true,
-    path: "https://lottie.host/92f5826a-6158-40d5-9429-0a7de2ab1e2d/jOaZkODiyK.json" // ولد كرتوني مبتسم
+    path: "https://assets1.lottiefiles.com/packages/lf20_m6cuL6uZJj.json"
   });
   loadNames();
 });
@@ -180,21 +180,21 @@ function setCharacter(state) {
   if (!characterAnim) return;
   let url = "";
   switch(state) {
-    case "start":
-      url = "https://lottie.host/92f5826a-6158-40d5-9429-0a7de2ab1e2d/jOaZkODiyK.json"; // فرحان
-      break;
-    case "typing":
-      url = "https://lottie.host/6f4dcfaf-4b9c-4a84-b5f9-0cb62b518b5e/8CuBD31nBj.json"; // بيفكر
-      break;
-    case "waiting":
-      url = "https://lottie.host/ea70c3ee-9376-4a5e-981f-8037db7adbc2/CdbmE8Gtx9.json"; // مستني
-      break;
-    case "result":
-      url = "https://lottie.host/6fdb71e9-d5ed-4a4f-9cda-1b6783e92cb8/9MvlM1FWhu.json"; // بيصفق
-      break;
-    default:
-      url = "https://lottie.host/92f5826a-6158-40d5-9429-0a7de2ab1e2d/jOaZkODiyK.json";
-  }
+  case "start":
+    url = "https://assets1.lottiefiles.com/packages/lf20_m6cuL6uZJj.json"; // فرحان
+    break;
+  case "typing":
+    url = "https://assets8.lottiefiles.com/packages/lf20_qp1q7mct.json"; // بيفكر / بيكتب
+    break;
+  case "waiting":
+    url = "https://assets3.lottiefiles.com/packages/lf20_fcfjwiyb.json"; // مستني
+    break;
+  case "result":
+    url = "https://assets2.lottiefiles.com/packages/lf20_qp1q7mct.json"; // بيصفق
+    break;
+  default:
+    url = "https://assets1.lottiefiles.com/packages/lf20_m6cuL6uZJj.json";
+}
   characterAnim.destroy();
   characterAnim = lottie.loadAnimation({
     container: document.getElementById("character"),
