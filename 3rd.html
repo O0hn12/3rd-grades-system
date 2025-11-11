@@ -79,10 +79,15 @@ input:focus {
   position: fixed;
   bottom: 15px;
   left: 15px;
-  width: 150px;
-  height: 150px;
-  z-index: 1;
+  width: 200px;
+  height: 200px;
+  z-index: 10;
   animation: floatAround 25s linear infinite;
+}
+
+#character {
+  width: 100%;
+  height: 100%;
 }
 @keyframes floatAround {
   0% { transform: translate(0, 0); }
