@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>points show</title>
+<title>points show مع زيزو</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <style>
 body {
   font-family: "Tajawal", sans-serif;
@@ -16,9 +15,10 @@ body {
   display: flex; justify-content: center; align-items: center;
   height: 100vh; flex-direction: column;
 }
-@keyframes walkRight {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(100vw); }
+@keyframes gradientBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 #welcome, #pointsPage { display: none; text-align: center; }
 h1 { font-size: 2.4em; color: #2d3436; text-shadow: 2px 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
@@ -40,9 +40,7 @@ button:hover {
   width: 90%; max-width: 360px;
   box-sizing: border-box;
 }
-.container > * {
-  margin-bottom: 16px;
-}
+.container > * { margin-bottom: 16px; }
 input {
   width: 100%; padding: 14px;
   border: 1px solid #ccc; border-radius: 12px;
@@ -73,29 +71,44 @@ input:focus {
   color: #2d3436;
   transition: opacity 0.5s ease;
 }
-#characterBox {
-  position: fixed;
-  bottom: 15px;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  z-index: 10;
-  animation: walkRight 10s linear infinite;
+
+/* شخصية زيزو */
+.zizo{
+  position:fixed; bottom:15px; left:15px; width:200px; height:200px; z-index:10;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
 }
-#character {
-  width: 100%;
-  height: 100%;
+.zizo svg{width:100%; height:100%}
+.breath{animation:breath 2.8s ease-in-out infinite; transform-origin:50% 70%}
+@keyframes breath{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.02)}
 }
-@keyframes floatAround {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(50vw, -10vh); }
-  50% { transform: translate(30vw, 15vh); }
-  75% { transform: translate(10vw, -15vh); }
-  100% { transform: translate(0, 0); }
+.blink{animation:blink 4s ease-in-out infinite}
+@keyframes blink{
+  0%,92%,100%{transform:scaleY(1)}
+  94%{transform:scaleY(0.05)}
+  96%{transform:scaleY(1)}
+}
+
+/* فقاعات */
+.float-layer{position:fixed;inset:0;pointer-events:none;z-index:1}
+.bubble{
+  position:absolute; width:26px; height:26px; border-radius:50%;
+  background:rgba(255,255,255,0.7);
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  animation: rise linear infinite;
+}
+@keyframes rise{
+  0%{transform:translateY(110vh) scale(0.8); opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(-20vh) scale(1.2); opacity:0}
 }
 </style>
 </head>
 <body>
+
+<!-- فقاعات خلفية -->
+<div class="float-layer" id="floatLayer"></div>
 
 <!-- الصفحة الترحيبية -->
 <div id="welcome">
@@ -112,27 +125,37 @@ input:focus {
     <button onclick="getPoints()">اعرض النتيجة</button>
     <div id="result"></div>
   </div>
-  <!-- شخصية تفاعلية -->
-  <div id="characterBox">
-    <div id="character"></div>
-  </div>
+</div>
+
+<!-- شخصية زيزو -->
+<div class="zizo" aria-label="شخصية زيزو">
+  <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img">
+    <rect x="30" y="20" width="160" height="160" rx="28" fill="#FFEB55" stroke="#2EC4B6" stroke-width="6" class="breath"/>
+    <circle cx="85" cy="95" r="10" fill="#FFA6C1" opacity="0.9"/>
+    <circle cx="135" cy="95" r="10" fill="#FFA6C1" opacity="0.9"/>
+    <g class="blink">
+      <circle cx="85" cy="75" r="12" fill="#FFFFFF"/>
+      <circle cx="135" cy="75" r="12" fill="#FFFFFF"/>
+      <circle cx="85" cy="75" r="6" fill="#263238"/>
+      <circle cx="135" cy="75" r="6" fill="#263238"/>
+    </g>
+    <path d="M80 120 Q110 140 140 120" stroke="#263238" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="48" y="140" width="124" height="20" rx="8" fill="#FFFFFF"/>
+    <rect x="48" y="160" width="124" height="24" rx="8" fill="#2EC4B6"/>
+    <g transform="translate(140,30) rotate(12)">
+      <rect x="-20" y="-12" width="40" height="16" rx="8" fill="#FF6B6B"/>
+      <rect x="-8" y="4" width="16" height="8" rx="4" fill="#2EC4B6"/>
+    </g>
+  </svg>
 </div>
 
 <script>
 const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
 let allNames = [];
-let characterAnim;
 
-// تشغيل الأنيميشن الأول عند التحميل
+// تشغيل أول صفحة
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("welcome").style.display = "block";
-  characterAnim = lottie.loadAnimation({
-  container: document.getElementById("character"),
-  renderer: "svg",
-  loop: true,
-  autoplay: true,
-  path: "https://lottie.host/4b2f5e7f-9e3e-4a7d-8e6f-3e2b9e2a1f3a/HappySuperhero.json"
-});
   loadNames();
 });
 
@@ -154,11 +177,10 @@ async function loadNames() {
     console.error("خطأ في تحميل الأسماء", err);
   }
 }
-
+  
 // اقتراح الأسماء أثناء الكتابة
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
-  setCharacter("typing");
   const val = nameInput.value.trim();
   const box = document.getElementById("suggestions");
   box.innerHTML = "";
@@ -172,46 +194,14 @@ nameInput.addEventListener("input", () => {
   });
 });
 
-// تغيير حالة الشخصية
-function setCharacter(state) {
-  if (!characterAnim) return;
-  let url = "";
-  switch(state) {
-    case "start":
-      url = "https://assets10.lottiefiles.com/packages/lf20_ysni9f.json"; // Kid Hi
-      break;
-    case "typing":
-      url = "https://assets10.lottiefiles.com/packages/lf20_qwatcu.json"; // Kid Typing
-      break;
-    case "waiting":
-      url = "https://assets10.lottiefiles.com/packages/lf20_tzjzqz.json"; // Kid Waiting
-      break;
-    case "result":
-      url = "https://assets10.lottiefiles.com/packages/lf20_j1adxtyb.json"; // Kid Clap
-      break;
-    default:
-      url = "https://assets10.lottiefiles.com/packages/lf20_9cyylh.json"; // Kid Idle
-  }
-  characterAnim.destroy();
-  characterAnim = lottie.loadAnimation({
-    container: document.getElementById("character"),
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    path: url
-  });
-}
-
 // الانتقال لصفحة النقاط
 function goToPoints() {
   document.getElementById("welcome").style.display = "none";
   document.getElementById("pointsPage").style.display = "block";
-  setCharacter("start");
 }
 
 // جلب النقاط
 async function getPoints() {
-  setCharacter("waiting");
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
   if (!allNames.includes(name)) {
@@ -233,8 +223,45 @@ async function getPoints() {
         🏆 <strong>المحصلة النهائية: ${data.final}</strong>
       `;
       resultBox.style.opacity = 1;
-      setCharacter("result");
     }, 200);
+  }
+}
+
+// تولد فقاعات عشوائية
+const layer = document.getElementById('floatLayer');
+for(let i=0;i<24;i++){
+  const b=document.createElement('div');
+  b.className='bubble';
+  b.style.left=Math.random()*100+'vw';
+  b.style.animationDuration=(10+Math.random()*12)+'s';
+  b.style.animationDelay=(Math.random()*5)+'s';
+  b.style.opacity=0.6+Math.random()*0.4;
+  layer.appendChild(b);
+}
+
+// زر احتفال: كونفيتي
+document.addEventListener('keydown', (e)=>{
+  if(e.key==="Enter"){celebrate();}
+});
+function celebrate(){
+  for(let i=0;i<40;i++){
+    const conf=document.createElement('div');
+    conf.style.position='fixed';
+    conf.style.left=Math.random()*100+'vw';
+    conf.style.top='-10vh';
+    conf.style.width='10px';
+    conf.style.height='16px';
+    conf.style.background=['#FF6B6B','#2EC4B6','#FFA6C1','#FFD166'][Math.floor(Math.random()*4)];
+    conf.style.transform=`rotate(${Math.random()*360}deg)`;
+    conf.style.zIndex=4;
+    conf.style.borderRadius='3px';
+    conf.style.boxShadow='0 2px 6px rgba(0,0,0,0.2)';
+    document.body.appendChild(conf);
+    const duration=8+Math.random()*6;
+    conf.animate([
+      { transform: conf.style.transform, top: '-10vh', opacity: 1 },
+      { transform: `translateY(100vh) rotate(${Math.random()*360}deg)`, top: '100vh', opacity: 0.8 }
+    ], { duration: duration*1000, easing: 'cubic-bezier(.25,.8,.25,1)' }).onfinish=()=>conf.remove();
   }
 }
 </script>
