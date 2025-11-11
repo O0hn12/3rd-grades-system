@@ -139,7 +139,7 @@ input:focus {
 </div>
 
 <!-- شخصية زيزو -->
-<div class="zizo" aria-label="طفل سوبر هيرو كرتوني">
+<div class="zizo" aria-label="زيزو سوبر هيرو واقعي">
 <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
@@ -154,7 +154,13 @@ input:focus {
       <stop offset="0%" stop-color="#E53945"/>
       <stop offset="100%" stop-color="#C72832"/>
     </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
   </defs>
+
+  <!-- ظل الأرض -->
+  <ellipse cx="110" cy="310" rx="50" ry="10" fill="#000" opacity="0.08"/>
 
   <!-- الرأس -->
   <g class="breath">
@@ -162,6 +168,9 @@ input:focus {
     <!-- خدود -->
     <circle cx="92" cy="55" r="3.5" fill="#FFA6C1" opacity="0.9"/>
     <circle cx="128" cy="55" r="3.5" fill="#FFA6C1" opacity="0.9"/>
+    <!-- حاجبين -->
+    <path d="M95 48 Q102 45 110 48" stroke="#6D4C41" stroke-width="2" stroke-linecap="round"/>
+    <path d="M115 48 Q122 45 130 48" stroke="#6D4C41" stroke-width="2" stroke-linecap="round"/>
     <!-- الشعر -->
     <path d="M82 50 Q110 5 138 50 Q125 25 95 35 Z" fill="#6D4C41"/>
     <!-- القناع -->
@@ -181,7 +190,10 @@ input:focus {
   <rect x="105" y="85" width="10" height="12" rx="2" fill="url(#skinGrad)"/>
 
   <!-- الجذع -->
-  <path d="M85 97 c0 -6 8 -12 15 -12 h30 c7 0 15 6 15 12 v55 c0 18 -14 33 -27 36 c-13 -3 -27 -18 -27 -36 z" fill="url(#suitGrad)"/>
+  <path d="M85 97 c0 -6 8 -12 15 -12 h30 c7 0 15 6 15 12 v55 c0 18 -14 33 -27 36 c-13 -3 -27 -18 -27 -36 z" fill="url(#suitGrad)" filter="url(#shadow)"/>
+  <!-- تفاصيل العضلات -->
+  <path d="M85 110 c15 -5 50 -5 50 0" stroke="#1E6EA8" stroke-width="2" fill="none"/>
+  <path d="M85 125 c15 -5 50 -5 50 0" stroke="#1E6EA8" stroke-width="2" fill="none"/>
 
   <!-- شعار الصدر -->
   <circle cx="110" cy="125" r="8" fill="#FFD166" stroke="#D62828" stroke-width="1"/>
@@ -190,7 +202,7 @@ input:focus {
   <!-- الكاب متحرك -->
   <path class="cape" d="M85 97 Q110 40 135 97" fill="url(#capeGrad)" opacity="0.9"/>
 
-  <!-- الذراعان مع أصابع -->
+  <!-- الذراعان -->
   <g class="arms">
     <!-- الذراع الأيسر -->
     <path d="M85 97 c-8 8 -12 18 -10 28 c5 10 12 10 16 5 c3 -5 6 -12 8 -18 z" fill="url(#skinGrad)"/>
