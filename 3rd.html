@@ -195,20 +195,19 @@ input:focus {
   <!-- الخدود -->
   <circle cx="134" cy="136" r="8" fill="url(#cheekGrad)"/>
   <circle cx="166" cy="136" r="8" fill="url(#cheekGrad)"/>
+
+  <!-- الأذنين داخل الرأس -->
+  <path d="M102 120 a6 6 0 1 0 0.1 0" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+  <path d="M98 120 q4 -4 8 0 q-4 4 -8 0" stroke="#B76E5A" stroke-width="0.6" opacity="0.5"/>
+  <circle cx="102" cy="120" r="3" fill="#E6B98F" opacity="0.6"/>
+
+  <path d="M198 120 a6 6 0 1 0 0.1 0" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
+  <path d="M194 120 q4 -4 8 0 q-4 4 -8 0" stroke="#B76E5A" stroke-width="0.6" opacity="0.5"/>
+  <circle cx="198" cy="120" r="3" fill="#E6B98F" opacity="0.6"/>
 </g>
-<!-- الأذنين بتفاصيل داخلية -->
-<path d="M102 120 a6 6 0 1 0 0.1 0" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
-<path d="M98 120 q4 -4 8 0 q-4 4 -8 0" stroke="#B76E5A" stroke-width="0.6" opacity="0.5"/>
-<circle cx="102" cy="120" r="3" fill="#E6B98F" opacity="0.6"/>
-
-<path d="M198 120 a6 6 0 1 0 0.1 0" fill="url(#skinGrad)" stroke="#D9927D" stroke-width="1"/>
-<path d="M194 120 q4 -4 8 0 q-4 4 -8 0" stroke="#B76E5A" stroke-width="0.6" opacity="0.5"/>
-<circle cx="198" cy="120" r="3" fill="#E6B98F" opacity="0.6"/>
-
 <!-- الرقبة -->
 <rect x="142" y="164" width="16" height="12" rx="4" fill="url(#skinGrad)"/>
 <path d="M142 174 h16" stroke="#000" stroke-width="1" opacity="0.1"/>
-<path d="M142 164 q8 6 16 0" stroke="#000" stroke-width="0.5" opacity="0.05"/>
 
 <!-- الكتفين -->
 <path d="M110 174 q-10 10 -8 20 q2 10 10 10 h20 q-8 -10 -8 -20 q0 -10 -14 -10 z"
@@ -216,55 +215,63 @@ input:focus {
 <path d="M190 174 q10 10 8 20 q-2 10 -10 10 h-20 q8 -10 8 -20 q0 -10 14 -10 z"
       fill="url(#suitGrad)" stroke="#0F3E5A" stroke-width="0.8" opacity="0.9"/>
 
-<!-- البدلة (بداية الصدر) -->
+<!-- الصدر -->
 <path d="M118 178 c0 -8 8 -14 18 -14 h28 c10 0 18 6 18 14
          v64 c0 26 -18 46 -32 50 c-16 -4 -32 -24 -32 -50 z"
       fill="url(#suitGrad)"/>
 <path d="M118 178 c0 -8 8 -14 18 -14 h28 c10 0 18 6 18 14
          v64 c0 26 -18 46 -32 50 c-16 -4 -32 -24 -32 -50 z"
       fill="url(#suitShine)" opacity="0.35"/>
-<path d="M126 178 q24 12 48 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
-<path d="M118 200 q32 16 48 0" stroke="#fff" stroke-width="0.15" opacity="0.15"/>
-<path d="M118 220 q32 16 48 0" stroke="#fff" stroke-width="0.5" opacity="0.1"/>
-<path d="M130 180 q16 8 32 0" stroke="#fff" stroke-width="0.6" opacity="0.2"/>
-<path d="M118 178 v64" stroke="#fff" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.3"/>
-<path d="M182 178 v64" stroke="#fff" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.3"/>
-<!-- الذراع اليمنى محسّنة -->
-<path d="M190 186 
-         c12 10 18 22 14 34 
-         c-6 12 -16 16 -22 12 
-         c-7 -4 -12 -14 -15 -24 
-         c10 6 16 8 23 -10 z"
-      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.6" opacity="0.95"/>
 
-<!-- كف اليد اليمنى -->
-<path d="M183 224 c6 2 10 6 10 10 
+<!-- الذراع اليمنى الواقعية -->
+<path d="M186 186 
+         c10 6 14 14 16 22 
+         c2 10 -2 20 -8 24 
+         c-6 4 -12 2 -16 -4 
+         c-4 -6 -6 -14 -6 -22 
+         c0 -10 4 -16 14 -20 z"
+      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.8"/>
+<!-- مفصل الكوع -->
+<circle cx="190" cy="210" r="2.5" fill="#B76E5A" opacity="0.5"/>
+<!-- الساعد -->
+<path d="M188 212 c6 4 10 10 10 16 
+         c0 6 -4 10 -10 10 
+         c-6 0 -10 -4 -10 -10 
+         c0 -6 4 -12 10 -16 z"
+      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.6"/>
+<!-- اليد -->
+<path d="M186 238 c6 2 10 6 10 10 
          c0 6 -6 10 -12 10 
          c-6 0 -10 -4 -12 -10 
          c2 -6 6 -8 14 -10 z"
-      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.6" opacity="0.95"/>
-<path d="M184 230 h8" stroke="#B76E5A" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
-<path d="M182 227 h7" stroke="#B76E5A" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
-<path d="M180 222 q4 2 8 0" stroke="#B76E5A" stroke-width="0.8" opacity="0.5"/>
+      fill="url(#skinGrad)" stroke="#B76E5A" stroke-width="0.6"/>
+<path d="M186 244 h8" stroke="#B76E5A" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+<path d="M184 241 h7" stroke="#B76E5A" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
 
-<!-- الذراع اليسرى محسّنة -->
-<path d="M110 186 
-         c-12 10 -18 22 -14 34 
-         c6 12 16 16 22 12 
-         c7 -4 12 -14 15 -24 
-         c-10 6 -16 8 -23 -10 z"
-      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.6" opacity="0.95"/>
-<!-- كف اليد اليسرى -->
-<path d="M116 222 q4 2 8 0" stroke="#B76E5A" stroke-width="0.8" opacity="0.5"/>
-
-<!-- النجمة على الصدر -->
-<g transform="translate(150,206)">
-  <circle r="12" fill="#FFD166" stroke="#E63946" stroke-width="2"/>
-  <circle r="2" fill="#FFF" opacity="0.6"/>
-  <polygon points="0,-8 2,-2 8,-2 3,1 4,7 0,4 -4,7 -3,1 -8,-2 -2,-2" fill="#fff"/>
-  <path d="M-6,-6 q6 4 12 0" stroke="#fff" stroke-width="1" opacity="0.4"/>
-</g>
-
+<!-- الذراع اليسرى الواقعية -->
+<path d="M114 186 
+         c-10 6 -14 14 -16 22 
+         c-2 10 2 20 8 24 
+         c6 4 12 2 16 -4 
+         c4 -6 6 -14 6 -22 
+         c0 -10 -4 -16 -14 -20 z"
+      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.8"/>
+<!-- مفصل الكوع -->
+<circle cx="110" cy="210" r="2.5" fill="#B76E5A" opacity="0.5"/>
+<!-- الساعد -->
+<path d="M112 212 c-6 4 -10 10 -10 16 
+         c0 6 4 10 10 10 
+         c6 0 10 -4 10 -10 
+         c0 -6 -4 -12 -10 -16 z"
+      fill="url(#skinGrad)" stroke="#D9927D" stroke-width="0.6"/>
+<!-- اليد -->
+<path d="M114 238 c-6 2 -10 6 -10 10 
+         c0 6 6 10 12 10 
+         c6 0 10 -4 12 -10 
+         c-2 -6 -6 -8 -14 -10 z"
+      fill="url(#skinGrad)" stroke="#B76E5A" stroke-width="0.6"/>
+<path d="M114 244 h-8" stroke="#B76E5A" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+<path d="M116 241 h-7" stroke="#B76E5A" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
 <!-- الحزام -->
 <rect x="126" y="238" width="48" height="6" rx="3" fill="#E63946"/>
 <rect x="144" y="238" width="12" height="6" rx="2" fill="#FFD700" opacity="0.8"/>
@@ -290,15 +297,6 @@ input:focus {
   <rect x="148" y="300" width="24" height="4" fill="#3E2723"/>
   <path d="M130 292 q10 4 20 0" stroke="#fff" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.3"/>
   <path d="M150 292 q10 4 20 0" stroke="#fff" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.3"/>
-</g>
-
-<!-- الكرة -->
-<g transform="translate(110,240)">
-  <ellipse rx="18" ry="24" fill="url(#ballGrad)" stroke="#8E1A1F" stroke-width="1"/>
-  <path d="M-12,-8 h24 M-12,0 h24 M-12,8 h24"
-        stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
-  <ellipse cx="-6" cy="-10" rx="8" ry="6" fill="#fff" opacity="0.4"/>
-  <path d="M-10,-12 q10 6 20 0" stroke="#fff" stroke-width="1" opacity="0.2"/>
 </g>
 
 <!-- الظل الأرضي -->
