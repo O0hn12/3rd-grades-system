@@ -199,8 +199,6 @@ async function getPoints() {
     return;
   }
 
-  setZizoState("loading"); // زيزو بيستنى النتيجة
-
   const res = await fetch(apiURL + encodeURIComponent(name));
   const data = await res.json();
   if (data.error) {
