@@ -25,7 +25,7 @@ body {
   display: none;
   text-align: center;
   position: relative;
-  z-index: 10; /* علشان تبقى فوق شخصية زيزو */
+  z-index: 10;
 }
 h1 { font-size: 2.4em; color: #2d3436; text-shadow: 2px 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
 button {
@@ -83,11 +83,11 @@ input:focus {
 /* شخصية زيزو */
 #zizo-container {
   position: fixed;
-  top: 5vh; /* بدل bottom */
+  top: 5vh;
   left: 50%;
   transform: translateX(-50%);
-  width: 50vw;   /* عرض مناسب */
-  height: auto;  /* يخلي الفيديو يحتفظ بأبعاده */
+  width: 50vw;
+  height: auto;
   z-index: 1;
   pointer-events: none;
   opacity: 0.95;
@@ -106,20 +106,9 @@ input:focus {
   10%{opacity:1}
   100%{transform:translateY(-20vh) scale(1.2); opacity:0}
 }
-
-  path[fill="#fecb9c"] {
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
 </style>
 </head>
 <body>
-
 <!-- فقاعات -->
 <div class="float-layer" id="floatLayer"></div>
   
@@ -140,8 +129,7 @@ input:focus {
   </div>
 </div>
 
-  <!-- شخصية زيزو -->
-<!-- شخصية زيزو بصور متتابعة -->
+<!-- شخصية زيزو -->
 <div id="zizo-container">
   <video id="zizo-video" autoplay loop muted playsinline style="width:100%; height:100%;">
     <source src="videos/zizo-wave.mp4" type="video/mp4">
@@ -177,9 +165,10 @@ async function loadNames() {
   }
 }
 
-// اقتراح الأسماء
+// اقتراح الأسماء + حالة التفكير
 const nameInput = document.getElementById("nameInput");
 nameInput.addEventListener("input", () => {
+  setZizoState("think"); // زيزو بيفكر
   const val = nameInput.value.trim();
   const box = document.getElementById("suggestions");
   box.innerHTML = "";
@@ -193,24 +182,30 @@ nameInput.addEventListener("input", () => {
   });
 });
 
-// الانتقال لصفحة النقاط
+// الانتقال لصفحة النقاط + حالة الاستعداد
 function goToPoints() {
+  setZizoState("ready"); // زيزو متحمس
   document.getElementById("welcome").style.display = "none";
   document.getElementById("pointsPage").style.display = "block";
 }
 
-// جلب النقاط
+// جلب النقاط + حالات التحميل والنتيجة
 async function getPoints() {
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
   if (!allNames.includes(name)) {
     resultBox.innerText = "❌ الاسم غير مسجل";
+    setZizoState("sad"); // زيزو حزين
     return;
   }
+
+  setZizoState("loading"); // زيزو بيستنى النتيجة
+
   const res = await fetch(apiURL + encodeURIComponent(name));
   const data = await res.json();
   if (data.error) {
     resultBox.innerText = data.error;
+    setZizoState("sad");
   } else {
     resultBox.style.opacity = 0;
     setTimeout(() => {
@@ -222,6 +217,7 @@ async function getPoints() {
         🏆 <strong>المحصلة النهائية: ${data.final}</strong>
       `;
       resultBox.style.opacity = 1;
+      setZizoState("win"); // زيزو بيحتفل
     }, 200);
   }
 }
@@ -239,7 +235,14 @@ function generateBubbles() {
     layer.appendChild(b);
   }
 }
+
+// دالة تغيير حالة زيزو
+function setZizoState(state) {
+  const video = document.getElementById("zizo-video");
+  video.src = "videos/zizo-" + state + ".mp4";
+  video.load();
+  video.play();
+}
 </script>
-
-
-
+</body>
+</html>
