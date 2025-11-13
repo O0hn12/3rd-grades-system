@@ -83,11 +83,11 @@ input:focus {
 /* شخصية زيزو */
 #zizo-container {
   position: fixed;
-  bottom: 5vh; /* بدل 0 علشان يبعد شوية عن الحافة */
+  top: 5vh; /* بدل bottom */
   left: 50%;
   transform: translateX(-50%);
-  width: 50vw;
-  height: auto;
+  width: 50vw;   /* عرض مناسب */
+  height: auto;  /* يخلي الفيديو يحتفظ بأبعاده */
   z-index: 1;
   pointer-events: none;
   opacity: 0.95;
@@ -240,5 +240,6 @@ function generateBubbles() {
   }
 }
 </script>
+
 
 
