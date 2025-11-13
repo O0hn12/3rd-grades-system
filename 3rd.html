@@ -83,14 +83,14 @@ input:focus {
 /* شخصية زيزو */
 #zizo-container {
   position: fixed;
-  bottom: 0;
+  bottom: 5vh; /* بدل 0 علشان يبعد شوية عن الحافة */
   left: 50%;
   transform: translateX(-50%);
-  width: 60vw;   /* بدل 20% من عرض الشاشة */
-  height: 60vh;  /* بدل 20% من ارتفاع الشاشة */
+  width: 50vw;
+  height: auto;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 /* فقاعات */
@@ -240,4 +240,5 @@ function generateBubbles() {
   }
 }
 </script>
+
 
