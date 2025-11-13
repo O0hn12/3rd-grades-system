@@ -116,7 +116,10 @@ input:focus {
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
-  
+
+  #zizo-img {
+  transition: opacity 0.5s ease; /* يخلي التغيير ناعم */
+} 
 </style>
 </head>
 <body>
@@ -240,18 +243,30 @@ function generateBubbles() {
 }
   let waveIndex = 0;
 const waveFrames = [
-  "wave-1.png",
-  "wave-2.png",
-  "wave-3.png",
-  "wave-4.png",
-  "wave-3.png",
-  "wave-2.png",
-  "wave-1.png"
+  "1.png",
+  "2.png",
+  "3.png",
+  "4.png",
+  "5.png",
+  "6.png",
+  "5.png",
+  "4.png",
+  "3.png",
+  "2.png",
+  "1.png"
 ];
 
+const img = document.getElementById("zizo-img");
+
 setInterval(() => {
-  const img = document.getElementById("zizo-img");
-  img.src = "images/" + waveFrames[waveIndex];
-  waveIndex = (waveIndex + 1) % waveFrames.length;
-}, 100);
+  // اخفي الصورة تدريجيًا
+  img.style.opacity = 0;
+
+  // بعد نص ثانية غيّر الصورة ورجعها تظهر
+  setTimeout(() => {
+    img.src = "images/" + waveFrames[waveIndex];
+    img.style.opacity = 1;
+    waveIndex = (waveIndex + 1) % waveFrames.length;
+  }, 500); // نفس مدة الـ transition
+}, 100); // كل ثانية يبدّل صورة
 </script>
