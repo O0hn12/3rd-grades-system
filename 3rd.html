@@ -48,16 +48,18 @@ button:hover {
   position: relative;
 }
 .container {
-  background: rgba(0, 0, 255, 0.12); /* شفافية أكتر */
+  background: rgba(0, 0, 255, 0.12); /* أزرق شفاف */
   border: 2px solid #e84393;
   padding: 28px 22px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  width: 95%; max-width: 480px; /* أكبر شوية يناسب الموبايل */
-  margin-top: 55vh; /* يخلي المربع تحت زيزو مباشرة */
-  box-sizing: border-box;
+  width: 95%; max-width: 480px;
+  position: absolute;
+  top: 45vh; /* يخلي المربع تحت زيزو بالظبط */
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
-  position: relative;
+  box-sizing: border-box;
 }
 input {
   width: 100%; padding: 18px; /* كبر البادينج */
@@ -97,7 +99,12 @@ input {
   pointer-events: none;
   opacity: 0.95;
 }
-
+h2 {
+  font-size: 2em;
+  color: #ffffff; /* 👈 يخلي النص أبيض */
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* 👈 يخلي الكلمة بارزة */
+  margin-bottom: 20px;
+}
 /* فقاعات */
 .float-layer{position:fixed;inset:0;pointer-events:none;z-index:0}
 .bubble{
@@ -260,6 +267,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
