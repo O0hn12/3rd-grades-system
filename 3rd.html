@@ -9,10 +9,8 @@
 body {
   font-family: "Tajawal", sans-serif;
   margin: 0; padding: 0;
-  background: linear-gradient(135deg, #0984e3, #d63031, #fdcb6e, #6c5ce7);
-  /* أزرق - أحمر - أصفر - بنفسجي */
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background: url("images/superhero-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
   display: flex; justify-content: center; align-items: center;
   height: 100vh; flex-direction: column;
   overflow: hidden;
@@ -50,12 +48,12 @@ button:hover {
   position: relative;
 }
 .container {
-  background: rgba(0, 0, 255, 0.25); /* أزرق شفاف يناسب بدلة زيزو */
+  background: rgba(0, 0, 255, 0.15); /* أزرق أفتح وشفاف أكتر */
   border: 2px solid #e84393;         /* إطار وردي/أحمر زي القناع والكيب */
   padding: 25px 20px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  width: 90%; max-width: 360px;
+  width: 90%; max-width: 420px;      /* رجّع الحجم أكبر شوية */
   box-sizing: border-box;
   z-index: 2;
   position: relative;
@@ -259,4 +257,5 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
