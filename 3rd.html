@@ -9,7 +9,7 @@
 body {
   font-family: "Tajawal", sans-serif;
   margin: 0; padding: 0;
-  background: url("images/superhero-bg.jpg") no-repeat center center fixed;
+  background: url("https://i.ibb.co/0yZqDqzf/colorful-flat-comic-style-background-free-vector.jpg") no-repeat center center fixed;
   background-size: cover;
   display: flex; justify-content: center; align-items: center;
   height: 100vh; flex-direction: column;
@@ -48,20 +48,23 @@ button:hover {
   position: relative;
 }
 .container {
-  background: rgba(0, 0, 255, 0.15); /* أزرق أفتح وشفاف أكتر */
-  border: 2px solid #e84393;         /* إطار وردي/أحمر زي القناع والكيب */
-  padding: 25px 20px;
+  background: rgba(0, 0, 255, 0.12); /* شفافية أكتر */
+  border: 2px solid #e84393;
+  padding: 28px 22px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  width: 90%; max-width: 420px;      /* رجّع الحجم أكبر شوية */
+  width: 95%; max-width: 480px; /* أكبر شوية يناسب الموبايل */
+  margin-top: 55vh; /* يخلي المربع تحت زيزو مباشرة */
   box-sizing: border-box;
   z-index: 2;
   position: relative;
 }
-input:focus {
-  border-color: #6c5ce7;
-  box-shadow: 0 0 8px rgba(108,92,231,0.5);
-  outline: none;
+input {
+  width: 100%; padding: 18px; /* كبر البادينج */
+  border: 1px solid #ccc; border-radius: 14px;
+  font-size: 1.3em; /* كبر الخط */
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 .suggestions {
   background: #fff; border-radius: 12px; border: 1px solid #ddd;
@@ -257,5 +260,6 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
