@@ -130,7 +130,7 @@ input {
   </video>
 </div>
 <script>
-const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev/?name=";
+const apiURL = "https://3rd-system-grades.johnmamdouh777.workers.dev";
 let allNames = [];
 
 // تشغيل أول صفحة
@@ -200,7 +200,7 @@ async function getPoints() {
     return;
   }
 
-  const res = await fetch(apiURL + encodeURIComponent(name));
+  const res = await fetch(apiURL + "?name=" + encodeURIComponent(name));
   const data = await res.json();
   if (data.error) {
     resultBox.innerText = data.error;
@@ -245,6 +245,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
