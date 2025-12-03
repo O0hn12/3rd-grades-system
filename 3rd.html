@@ -142,7 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 async function loadNames() {
   try {
-    const res = await fetch(apiURL + "load_names&_t=" + Date.now()); // 👈 يكسر أي كاش خارجي
+    const res = await fetch(apiURL + "?name=load_names");
     const data = await res.json();
     if (data.names) {
       allNames = data.names;
@@ -245,6 +245,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
