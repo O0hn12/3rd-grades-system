@@ -285,8 +285,13 @@ function setZizoState(state) {
   video.load();
   video.play();
 }
+
+  function goToPoints() {
+  setZizoState("ready"); // زيزو متحمس
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("pointsPage").style.display = "block";
+}
+
 </script>
 </body>
 </html>
-
-
