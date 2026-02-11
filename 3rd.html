@@ -208,7 +208,7 @@ async function getPoints() {
   const feriaData = await feriaRes.json();
   const feriaRows = feriaData.records || [];
 
-  // 🟢 خريطة الهدايا → النقاط (زي ما اتفقنا)
+  // 🟢 خريطة الهدايا → النقاط
   const giftPointsMap = {
     "لعبة": 4,
     "كراسة رسم": 3,
@@ -224,6 +224,8 @@ async function getPoints() {
     if (childName !== name) return;
 
     const giftName = String(r["الهدايا المختارة"] || "").trim();
+    console.log("Row:", r);
+    console.log("GiftName raw:", giftName);
     if (!giftName) return;
 
     // قسم الخلية على الفواصل
@@ -302,9 +304,6 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
-
-
-
 
 
 
