@@ -220,30 +220,26 @@ async function getPoints() {
   };
 
   // 🟢 احسب المستخدم (used)
-  let used = 0;
-  feriaRows.forEach(r => {
-    const childName = String(r["الاسم"] || "").trim();
-    if (childName !== name) return;
+  // 🟢 احسب المستخدم (used)
+let used = 0;
 
-    // اقرأ العمودين F و G بشكل منفصل
-    ["F", "G"].forEach(col => {
-      const cell = String(r[col] || "").trim();
-      if (!cell) return;
+feriaRows.forEach(r => {
+  const childName = String(r["الاسم"] || "").trim();
+  if (childName !== name) return;
 
-      // ممكن يكون في نفس العمود أكتر من هدية مفصولة بمسافة أو تاب
-      const gifts = cell.split(/\s{2,}|\t/).map(g => g.trim()).filter(Boolean);
+  ["هدية1", "هدية2"].forEach(col => {
+    const cell = String(r[col] || "").trim();
+    if (!cell) return;
 
-      gifts.forEach(g => {
-        const parts = g.split(":").map(x => x.trim());
-        if (parts.length < 2) return;
+    const parts = cell.split(":").map(x => x.trim());
+    if (parts.length < 2) return;
 
-        const qty = Number(parts[0]) || 1;   // العدد قبل النقطتين
-        const giftBase = parts[1];           // الاسم بعد النقطتين
+    const qty = Number(parts[0]) || 1;
+    const giftBase = parts[1];
 
-        console.log("Gift parsed:", giftBase, "Qty:", qty);
-        used += (giftPointsMap[giftBase] || 0) * qty;
-      });
-    });
+    used += (giftPointsMap[giftBase] || 0) * qty;
+  });
+});
   });
 
   // 🟢 احسب المحصلة النهائية
@@ -297,6 +293,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
