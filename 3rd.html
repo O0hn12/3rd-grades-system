@@ -218,40 +218,37 @@ async function getPoints() {
   };
 
   // 🟢 احسب المستخدم (used) من ورقة Feria
-  let used = 0;
-  feriaRows.forEach(r => {
-    const childName = String(r["الاسم"] || "").trim();
-    if (childName !== name) return;
+let used = 0;
+feriaRows.forEach(r => {
+  const childName = String(r["الاسم"] || "").trim();
+  if (childName !== name) return;
 
-    const giftName = String(r["الهدايا المختارة"] || "").trim();
-    console.log("Row:", r);
-    console.log("GiftName raw:", giftName);
-    if (!giftName) return;
+  const giftName = String(r["الهدايا المختارة"] || "").trim();
+  if (!giftName) return;
 
-    // قسم الخلية على الفواصل
-    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
+  // قسم الخلية على الفواصل
+  const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
-    gifts.forEach(g => {
-      // مثال: "1 × 🖍️ ألوان" أو "3 × 📘 كتاب صغير"
-      const match = g.match(/(\d+)\s*×\s*(.+)/);
-      let qty = 1;
-      let giftBase;
+  gifts.forEach(g => {
+    // مثال: "📘 كتاب صغير × 3"
+    const match = g.match(/(.+?)\s*×\s*(\d+)/);
+    let qty = 1;
+    let giftBase;
 
-      if (match) {
-        qty = Number(match[1]) || 1;
-        // شيل أي إيموجي أو رموز من الاسم
-        giftBase = match[2].replace(/[^\u0600-\u06FF\s]/g, "").trim();
-      } else {
-        giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
-      }
+    if (match) {
+      giftBase = match[1].replace(/[^\u0600-\u06FF\s]/g, "").trim();
+      qty = Number(match[2]) || 1;
+    } else {
+      giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
+    }
 
-      // توحيد المسافات
-      giftBase = giftBase.replace(/\s+/g, " ").trim();
+    // توحيد المسافات
+    giftBase = giftBase.replace(/\s+/g, " ").trim();
 
-      console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
-      used += (giftPointsMap[giftBase] || 0) * qty;
-    });
+    console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
+    used += (giftPointsMap[giftBase] || 0) * qty;
   });
+});
 
   // 🟢 احسب المحصلة النهائية
   const earned = Number(data.total || 0);
@@ -304,6 +301,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
