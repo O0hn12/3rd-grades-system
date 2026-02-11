@@ -193,8 +193,8 @@ async function getPoints() {
     return;
   }
 
-  // هات القيم الجاهزة من الـ API (زي gallery)
-  const res = await fetch(`${apiURL}?type=galleryPoints&name=${encodeURIComponent(name)}`);
+  // هات earned و minus من الـ API
+  const res = await fetch(apiURL + "?name=" + encodeURIComponent(name));
   const data = await res.json();
 
   if (data.error) {
@@ -203,13 +203,57 @@ async function getPoints() {
     return;
   }
 
-  // القيم اللي جاية من السيرفر
-  const earned = data.earned || 0;
-  const used = data.used || 0;
-  const minus = data.minus || 0;
+  // 🟢 هات بيانات الهدايا من ورقة Feria
+  const feriaRes = await fetch(apiURL + "?type=feriaAll");
+  const feriaData = await feriaRes.json();
+  const feriaRows = feriaData.records || [];
+
+  // 🟢 خريطة الهدايا → النقاط (عدل القيم حسب نظامك)
+  const giftPointsMap = {
+    "لعبة": 4,
+    "كراسة رسم": 3,
+    "ألوان": 2,
+    "ستيكرات": 1,
+    "كتاب صغير": 5
+  };
+
+  // 🟢 احسب المستخدم (used) من ورقة Feria
+  let used = 0;
+  feriaRows.forEach(r => {
+    const childName = String(r["الاسم"] || "").trim();
+    if (childName !== name) return;
+
+    const giftName = String(r["الهدايا المختارة"] || "").trim();
+    if (!giftName) return;
+
+    // لو فيه أكتر من هدية في نفس الخلية
+    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
+
+    gifts.forEach(g => {
+      // نظف النص من الإيموجي والرموز
+      const clean = g.replace(/[^\u0600-\u06FF\s×0-9]/g, "").trim();
+
+      // استخرج العدد بعد ×
+      const match = clean.match(/(.+?)\s*×\s*(\d+)/);
+      let giftBase = clean;
+      let qty = 1;
+
+      if (match) {
+        giftBase = match[1].trim();
+        qty = Number(match[2]) || 1;
+      }
+
+      console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
+      used += (giftPointsMap[giftBase] || 0) * qty;
+    });
+  });
+
+  // 🟢 احسب المحصلة النهائية
+  const earned = Number(data.total || 0);
+  const minus = Number(data.minus || 0);
   const final = earned - used - minus;
 
-  // اعرض النتيجة
+  // 🟢 اعرض النتيجة
   resultBox.style.opacity = 0;
   setTimeout(() => {
     resultBox.innerHTML = `
@@ -255,4 +299,3 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
-
