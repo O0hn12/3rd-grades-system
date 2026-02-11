@@ -187,6 +187,8 @@ nameInput.addEventListener("input", () => {
 async function getPoints() {
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
+
+  // تحقق من الاسم
   if (!allNames.includes(name)) {
     resultBox.innerText = "❌ الاسم غير مسجل";
     setZizoState("sad");
@@ -217,35 +219,35 @@ async function getPoints() {
     "كتاب صغير": 5
   };
 
-// 🟢 احسب المستخدم (used) من ورقة Feria
-let used = 0;
-feriaRows.forEach(r => {
-  const childName = String(r["الاسم"] || "").trim();
-  if (childName !== name) return;
+  // 🟢 احسب المستخدم (used) من العمودين F و G
+  let used = 0;
+  feriaRows.forEach(r => {
+    const childName = String(r["الاسم"] || "").trim();
+    if (childName !== name) return;
 
-  // خد الهدايا من العمود F و G (لو موجود)
-  const giftF = String(r["F"] || "").trim();
-  const giftG = String(r["G"] || "").trim();
+    // خد الهدايا من العمود F و G (لو موجود)
+    const giftF = String(r["F"] || "").trim();
+    const giftG = String(r["G"] || "").trim();
 
-  // اجمعهم في نص واحد
-  const giftName = [giftF, giftG].filter(Boolean).join(" ");
-  if (!giftName) return;
+    // اجمعهم في نص واحد
+    const giftName = [giftF, giftG].filter(Boolean).join(" ");
+    if (!giftName) return;
 
-  // قسم الخلية على أي فاصل (مسافة، تاب، فاصلة)
-  const gifts = giftName.split(/\s{2,}|[,،]/).map(g => g.trim()).filter(Boolean);
+    // قسم الخلية على أي فاصل (مسافة أو فاصلة)
+    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
-  gifts.forEach(g => {
-    // مثال: "5 : كتاب صغير"
-    const parts = g.split(":").map(x => x.trim());
-    if (parts.length < 2) return;
+    gifts.forEach(g => {
+      // مثال: "5 : كتاب صغير"
+      const parts = g.split(":").map(x => x.trim());
+      if (parts.length < 2) return;
 
-    const qty = Number(parts[0]) || 1;   // العدد قبل النقطتين
-    const giftBase = parts[1];           // الاسم بعد النقطتين
+      const qty = Number(parts[0]) || 1;   // العدد قبل النقطتين
+      const giftBase = parts[1];           // الاسم بعد النقطتين
 
-    console.log("Gift parsed:", giftBase, "Qty:", qty);
-    used += (giftPointsMap[giftBase] || 0) * qty;
+      console.log("Gift parsed:", giftBase, "Qty:", qty);
+      used += (giftPointsMap[giftBase] || 0) * qty;
+    });
   });
-});
 
   // 🟢 احسب المحصلة النهائية
   const earned = Number(data.total || 0);
@@ -266,7 +268,7 @@ feriaRows.forEach(r => {
     setZizoState("win");
   }, 200);
 }
-
+  
 // فقاعات
 function generateBubbles() {
   const layer = document.getElementById('floatLayer');
@@ -298,6 +300,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
