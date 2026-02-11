@@ -246,6 +246,7 @@ async function getPoints() {
   console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
   used += (giftPointsMap[giftBase] || 0) * qty;
 });
+    });
 
   // 🟢 احسب المحصلة النهائية
   const earned = Number(data.total || 0);
@@ -298,6 +299,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
