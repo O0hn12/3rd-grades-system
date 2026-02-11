@@ -218,6 +218,7 @@ async function getPoints() {
   };
 
   // 🟢 احسب المستخدم (used) من ورقة Feria
+// 🟢 احسب المستخدم (used) من ورقة Feria
 let used = 0;
 feriaRows.forEach(r => {
   const childName = String(r["الاسم"] || "").trim();
@@ -230,15 +231,23 @@ feriaRows.forEach(r => {
   const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
   gifts.forEach(g => {
-    // مثال: "📘 كتاب صغير × 3"
-    const match = g.match(/(.+?)\s*×\s*(\d+)/);
     let qty = 1;
-    let giftBase;
+    let giftBase = "";
 
-    if (match) {
-      giftBase = match[1].replace(/[^\u0600-\u06FF\s]/g, "").trim();
-      qty = Number(match[2]) || 1;
+    // حالة: العدد قبل الاسم → "1 × 🖍️ ألوان"
+    let match1 = g.match(/(\d+)\s*×\s*(.+)/);
+
+    // حالة: العدد بعد الاسم → "🖍️ ألوان × 1"
+    let match2 = g.match(/(.+?)\s*×\s*(\d+)/);
+
+    if (match1) {
+      qty = Number(match1[1]) || 1;
+      giftBase = match1[2].replace(/[^\u0600-\u06FF\s]/g, "").trim();
+    } else if (match2) {
+      giftBase = match2[1].replace(/[^\u0600-\u06FF\s]/g, "").trim();
+      qty = Number(match2[2]) || 1;
     } else {
+      // لو مفيش × خالص
       giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
     }
 
@@ -301,6 +310,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
