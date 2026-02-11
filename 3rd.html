@@ -184,13 +184,6 @@ nameInput.addEventListener("input", () => {
 });
 
 // الانتقال لصفحة النقاط + حالة الاستعداد
-function goToPoints() {
-  setZizoState("ready"); // زيزو متحمس
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("pointsPage").style.display = "block";
-}
-
-// جلب النقاط + حالات التحميل والنتيجة
 async function getPoints() {
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
@@ -222,6 +215,7 @@ async function getPoints() {
     "ألوان": 2,
     "ستيكرات": 1,
     "كتاب صغير": 5,
+    "القرآن": 5
   };
 
   // 🟢 احسب المستخدم (used) من ورقة Feria
@@ -246,6 +240,7 @@ async function getPoints() {
         qty = Number(match[2]) || 1;
       }
 
+      console.log("Gift raw:", g, "Clean:", clean, "Base:", giftBase, "Qty:", qty);
       used += (giftPointsMap[giftBase] || 0) * qty;
     });
   });
@@ -294,3 +289,4 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
