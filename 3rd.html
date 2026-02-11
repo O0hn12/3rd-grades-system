@@ -208,17 +208,13 @@ async function getPoints() {
   const feriaData = await feriaRes.json();
   const feriaRows = feriaData.records || [];
 
-  // 🟢 خريطة الهدايا → النقاط (عدل القيم حسب نظامك)
+  // 🟢 خريطة الهدايا → النقاط
   const giftPointsMap = {
-    "كتاب صغير": 5,
-    "قرآن": 5,
-    "كتاب صح": 4,
-    "سلوكيات": 3,
-    "لغة": 2,
     "لعبة": 4,
-    "كراسة رسم": 3,
-    "ألوان": 2,
-    "ستيكرات": 1
+  "كراسة رسم": 3,
+  "ألوان": 2,
+  "ستيكرات": 1,
+  "كتاب صغير": 5,
   };
 
   // 🟢 احسب المستخدم (used) من ورقة Feria
@@ -230,20 +226,21 @@ async function getPoints() {
     const giftName = String(r["الهدايا المختارة"] || "").trim();
     if (!giftName) return;
 
-    // لو فيه أكتر من هدية في نفس الخلية
-    const gifts = giftName.split(/[,،\n]/).map(g => g.trim()).filter(Boolean);
+    // قسم الخلية على الفواصل
+    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
     gifts.forEach(g => {
-      // استخرج العدد بعد ×
-      const match = g.match(/(.+?)\s*×\s*(\d+)/);
-      let giftBase, qty;
+      // مثال: "1 × 🖍️ ألوان" أو "3 × 📘 كتاب صغير"
+      const match = g.match(/(\d+)\s*×\s*(.+)/);
+      let qty = 1;
+      let giftBase = g;
 
       if (match) {
-        giftBase = match[1].replace(/[^\u0600-\u06FF\s]/g, "").trim();
-        qty = Number(match[2]) || 1;
+        qty = Number(match[1]) || 1;
+        // شيل الإيموجي والرموز من الاسم
+        giftBase = match[2].replace(/[^\u0600-\u06FF\s]/g, "").trim();
       } else {
         giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
-        qty = 1;
       }
 
       console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
@@ -302,4 +299,5 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
