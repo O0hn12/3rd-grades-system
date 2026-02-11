@@ -230,23 +230,22 @@ async function getPoints() {
     const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
     gifts.forEach(g => {
-      // مثال: "1 × 🖍️ ألوان" أو "3 × 📘 كتاب صغير"
-      const match = g.match(/(\d+)\s*×\s*(.+)/);
-      let qty = 1;
-      let giftBase = g;
+  // مثال: "1 × 🖍️ ألوان" أو "3 × 📘 كتاب صغير"
+  const match = g.match(/(\d+)\s*×\s*(.+)/);
+  let qty = 1;
+  let giftBase = g;
 
-      if (match) {
-        qty = Number(match[1]) || 1;
-        // شيل الإيموجي والرموز من الاسم
-        giftBase = match[2].replace(/[^\u0600-\u06FF\s]/g, "").trim();
-      } else {
-        giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
-      }
+  if (match) {
+    qty = Number(match[1]) || 1;
+    // شيل أي إيموجي أو رموز من الاسم
+    giftBase = match[2].replace(/[^\u0600-\u06FF\s]/g, "").trim();
+  } else {
+    giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
+  }
 
-      console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
-      used += (giftPointsMap[giftBase] || 0) * qty;
-    });
-  });
+  console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
+  used += (giftPointsMap[giftBase] || 0) * qty;
+});
 
   // 🟢 احسب المحصلة النهائية
   const earned = Number(data.total || 0);
@@ -299,5 +298,6 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
