@@ -210,11 +210,15 @@ async function getPoints() {
 
   // 🟢 خريطة الهدايا → النقاط (عدل القيم حسب نظامك)
   const giftPointsMap = {
+    "كتاب صغير": 5,
+    "قرآن": 5,
+    "كتاب صح": 4,
+    "سلوكيات": 3,
+    "لغة": 2,
     "لعبة": 4,
     "كراسة رسم": 3,
     "ألوان": 2,
-    "ستيكرات": 1,
-    "كتاب صغير": 5
+    "ستيكرات": 1
   };
 
   // 🟢 احسب المستخدم (used) من ورقة Feria
@@ -227,20 +231,19 @@ async function getPoints() {
     if (!giftName) return;
 
     // لو فيه أكتر من هدية في نفس الخلية
-    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
+    const gifts = giftName.split(/[,،\n]/).map(g => g.trim()).filter(Boolean);
 
     gifts.forEach(g => {
-      // نظف النص من الإيموجي والرموز
-      const clean = g.replace(/[^\u0600-\u06FF\s×0-9]/g, "").trim();
-
       // استخرج العدد بعد ×
-      const match = clean.match(/(.+?)\s*×\s*(\d+)/);
-      let giftBase = clean;
-      let qty = 1;
+      const match = g.match(/(.+?)\s*×\s*(\d+)/);
+      let giftBase, qty;
 
       if (match) {
-        giftBase = match[1].trim();
+        giftBase = match[1].replace(/[^\u0600-\u06FF\s]/g, "").trim();
         qty = Number(match[2]) || 1;
+      } else {
+        giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
+        qty = 1;
       }
 
       console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
@@ -299,3 +302,4 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
