@@ -188,7 +188,6 @@ async function getPoints() {
   const name = nameInput.value.trim();
   const resultBox = document.getElementById("result");
 
-  // تحقق من الاسم
   if (!allNames.includes(name)) {
     resultBox.innerText = "❌ الاسم غير مسجل";
     setZizoState("sad");
@@ -198,7 +197,6 @@ async function getPoints() {
   // هات earned و minus من الـ API
   const res = await fetch(apiURL + "?name=" + encodeURIComponent(name));
   const data = await res.json();
-
   if (data.error) {
     resultBox.innerText = data.error;
     setZizoState("sad");
@@ -216,36 +214,35 @@ async function getPoints() {
     "كراسة رسم": 3,
     "ألوان": 2,
     "ستيكرات": 1,
-    "كتاب صغير": 5
+    "كتاب صغير": 5,
+    "قرآن": 10,
+    "كتاب ممتاز": 8
   };
 
-  // 🟢 احسب المستخدم (used) من العمودين F و G
+  // 🟢 احسب المستخدم (used)
   let used = 0;
   feriaRows.forEach(r => {
     const childName = String(r["الاسم"] || "").trim();
     if (childName !== name) return;
 
-    // خد الهدايا من العمود F و G (لو موجود)
-    const giftF = String(r["F"] || "").trim();
-    const giftG = String(r["G"] || "").trim();
+    // اقرأ العمودين F و G بشكل منفصل
+    ["F", "G"].forEach(col => {
+      const cell = String(r[col] || "").trim();
+      if (!cell) return;
 
-    // اجمعهم في نص واحد
-    const giftName = [giftF, giftG].filter(Boolean).join(" ");
-    if (!giftName) return;
+      // ممكن يكون في نفس العمود أكتر من هدية مفصولة بمسافة أو تاب
+      const gifts = cell.split(/\s{2,}|\t/).map(g => g.trim()).filter(Boolean);
 
-    // قسم الخلية على أي فاصل (مسافة أو فاصلة)
-    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
+      gifts.forEach(g => {
+        const parts = g.split(":").map(x => x.trim());
+        if (parts.length < 2) return;
 
-    gifts.forEach(g => {
-      // مثال: "5 : كتاب صغير"
-      const parts = g.split(":").map(x => x.trim());
-      if (parts.length < 2) return;
+        const qty = Number(parts[0]) || 1;   // العدد قبل النقطتين
+        const giftBase = parts[1];           // الاسم بعد النقطتين
 
-      const qty = Number(parts[0]) || 1;   // العدد قبل النقطتين
-      const giftBase = parts[1];           // الاسم بعد النقطتين
-
-      console.log("Gift parsed:", giftBase, "Qty:", qty);
-      used += (giftPointsMap[giftBase] || 0) * qty;
+        console.log("Gift parsed:", giftBase, "Qty:", qty);
+        used += (giftPointsMap[giftBase] || 0) * qty;
+      });
     });
   });
 
@@ -300,6 +297,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
