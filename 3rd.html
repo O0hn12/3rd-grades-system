@@ -196,29 +196,78 @@ async function getPoints() {
   const resultBox = document.getElementById("result");
   if (!allNames.includes(name)) {
     resultBox.innerText = "❌ الاسم غير مسجل";
-    setZizoState("sad"); // زيزو حزين
+    setZizoState("sad");
     return;
   }
 
+  // هات earned و minus من الـ API
   const res = await fetch(apiURL + "?name=" + encodeURIComponent(name));
   const data = await res.json();
+
   if (data.error) {
     resultBox.innerText = data.error;
     setZizoState("sad");
-  } else {
-    resultBox.style.opacity = 0;
-    setTimeout(() => {
-      resultBox.innerHTML = `
-        👤 الاسم: ${data.name}<br>
-        ⭐ النقاط الكلية: ${data.total}<br>
-        🎁 النقاط المستخدمة: ${data.used}<br>
-        ➖ النقاط المخصومة: ${data.minus}<br>
-        🏆 <strong>المحصلة النهائية: ${data.final}</strong>
-      `;
-      resultBox.style.opacity = 1;
-      setZizoState("win"); // زيزو بيحتفل
-    }, 200);
+    return;
   }
+
+  // 🟢 هات بيانات الهدايا من ورقة Feria
+  const feriaRes = await fetch(apiURL + "?type=feriaAll");
+  const feriaData = await feriaRes.json();
+  const feriaRows = feriaData.records || [];
+
+  // 🟢 خريطة الهدايا → النقاط
+  const giftPointsMap = {
+    "لعبة": 4,
+    "كراسة رسم": 3,
+    "ألوان": 2,
+    "ستيكرات": 1,
+    "كتاب صغير": 5,
+  };
+
+  // 🟢 احسب المستخدم (used) من ورقة Feria
+  let used = 0;
+  feriaRows.forEach(r => {
+    const childName = String(r["الاسم"] || "").trim();
+    if (childName !== name) return;
+
+    const giftName = String(r["الهدايا المختارة"] || "").trim();
+    if (!giftName) return;
+
+    const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
+
+    gifts.forEach(g => {
+      const clean = g.replace(/[^\u0600-\u06FF\s×0-9]/g, "").trim();
+      const match = clean.match(/(.+?)\s*×\s*(\d+)/);
+      let giftBase = clean;
+      let qty = 1;
+
+      if (match) {
+        giftBase = match[1].trim();
+        qty = Number(match[2]) || 1;
+      }
+
+      used += (giftPointsMap[giftBase] || 0) * qty;
+    });
+  });
+
+  // 🟢 احسب المحصلة النهائية
+  const earned = Number(data.total || 0);
+  const minus = Number(data.minus || 0);
+  const final = earned - used - minus;
+
+  // 🟢 اعرض النتيجة
+  resultBox.style.opacity = 0;
+  setTimeout(() => {
+    resultBox.innerHTML = `
+      👤 الاسم: ${data.name}<br>
+      ⭐ النقاط الكلية: ${earned}<br>
+      🎁 النقاط المستخدمة: ${used}<br>
+      ➖ النقاط المخصومة: ${minus}<br>
+      🏆 <strong>المحصلة النهائية: ${final}</strong>
+    `;
+    resultBox.style.opacity = 1;
+    setZizoState("win");
+  }, 200);
 }
 
 // فقاعات
@@ -245,14 +294,3 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
