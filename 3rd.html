@@ -217,35 +217,28 @@ async function getPoints() {
     "كتاب صغير": 5
   };
 
-  // 🟢 احسب المستخدم (used) من ورقة Feria
+// 🟢 احسب المستخدم (used) من ورقة Feria
 let used = 0;
 feriaRows.forEach(r => {
   const childName = String(r["الاسم"] || "").trim();
   if (childName !== name) return;
 
-  const giftName = String(r["الهدايا المختارة"] || "").trim();
+  // خد الهدايا من العمود F و G (لو موجود)
+  const giftF = String(r["F"] || "").trim();
+  const giftG = String(r["G"] || "").trim();
+
+  // اجمعهم في نص واحد
+  const giftName = [giftF, giftG].filter(Boolean).join(", ");
   if (!giftName) return;
 
   // قسم الخلية على الفواصل
   const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
   gifts.forEach(g => {
-    // مثال: "1 × 🖍️ ألوان"
-    const match = g.match(/(\d+)\s*×\s*(.+)/);
-    let qty = 1;
-    let giftBase = "";
+    const [giftBase, qtyStr] = g.split(":").map(x => x.trim());
+    const qty = Number(qtyStr) || 1;
 
-    if (match) {
-      qty = Number(match[1]) || 1;
-      giftBase = match[2].replace(/[^\u0600-\u06FF\s]/g, "").trim();
-    } else {
-      giftBase = g.replace(/[^\u0600-\u06FF\s]/g, "").trim();
-    }
-
-    // توحيد المسافات
-    giftBase = giftBase.replace(/\s+/g, " ").trim();
-
-    console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
+    console.log("Gift parsed:", giftBase, "Qty:", qty);
     used += (giftPointsMap[giftBase] || 0) * qty;
   });
 });
@@ -301,6 +294,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
