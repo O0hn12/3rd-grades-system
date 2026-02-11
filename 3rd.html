@@ -235,8 +235,12 @@ feriaRows.forEach(r => {
   const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
   gifts.forEach(g => {
-    const [giftBase, qtyStr] = g.split(":").map(x => x.trim());
-    const qty = Number(qtyStr) || 1;
+    // مثال: "5 : كتاب صغير"
+    const parts = g.split(":").map(x => x.trim());
+    if (parts.length < 2) return;
+
+    const qty = Number(parts[0]) || 1;   // العدد قبل النقطتين
+    const giftBase = parts[1];           // الاسم بعد النقطتين
 
     console.log("Gift parsed:", giftBase, "Qty:", qty);
     used += (giftPointsMap[giftBase] || 0) * qty;
@@ -294,6 +298,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
