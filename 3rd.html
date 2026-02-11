@@ -208,13 +208,13 @@ async function getPoints() {
   const feriaData = await feriaRes.json();
   const feriaRows = feriaData.records || [];
 
-  // 🟢 خريطة الهدايا → النقاط
+  // 🟢 خريطة الهدايا → النقاط (عدل القيم حسب نظامك)
   const giftPointsMap = {
     "لعبة": 4,
     "كراسة رسم": 3,
     "ألوان": 2,
     "ستيكرات": 1,
-    "كتاب صغير": 5,
+    "كتاب صغير": 5
   };
 
   // 🟢 احسب المستخدم (used) من ورقة Feria
@@ -226,10 +226,14 @@ async function getPoints() {
     const giftName = String(r["الهدايا المختارة"] || "").trim();
     if (!giftName) return;
 
+    // لو فيه أكتر من هدية في نفس الخلية
     const gifts = giftName.split(/[,،]/).map(g => g.trim()).filter(Boolean);
 
     gifts.forEach(g => {
+      // نظف النص من الإيموجي والرموز
       const clean = g.replace(/[^\u0600-\u06FF\s×0-9]/g, "").trim();
+
+      // استخرج العدد بعد ×
       const match = clean.match(/(.+?)\s*×\s*(\d+)/);
       let giftBase = clean;
       let qty = 1;
@@ -239,7 +243,7 @@ async function getPoints() {
         qty = Number(match[2]) || 1;
       }
 
-      console.log("Gift raw:", g, "Clean:", clean, "Base:", giftBase, "Qty:", qty);
+      console.log("Gift raw:", g, "Base:", giftBase, "Qty:", qty);
       used += (giftPointsMap[giftBase] || 0) * qty;
     });
   });
