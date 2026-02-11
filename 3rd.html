@@ -207,6 +207,7 @@ async function getPoints() {
   const feriaRes = await fetch(apiURL + "?type=feriaAll");
   const feriaData = await feriaRes.json();
   const feriaRows = feriaData.records || [];
+  console.log("FERIA ROWS SAMPLE:", feriaRows[0]);
 
   // 🟢 خريطة الهدايا → النقاط
   const giftPointsMap = {
@@ -226,6 +227,11 @@ let used = 0;
 feriaRows.forEach(r => {
   const childName = String(r["الاسم"] || "").trim();
   if (childName !== name) return;
+  console.log(
+  "الاسم:", r["الاسم"],
+  "هدية1:", r["هدية1"],
+  "هدية2:", r["هدية2"]
+);
 
   ["هدية1", "هدية2"].forEach(col => {
     const cell = String(r[col] || "").trim();
@@ -292,3 +298,4 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
