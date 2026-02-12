@@ -206,6 +206,7 @@ async function getPoints() {
   // 🟢 هات بيانات الهدايا من ورقة Feria
   const feriaRes = await fetch(apiURL + "?type=feriaAll");
   const feriaData = await feriaRes.json();
+  console.log("FULL FERIA RESPONSE:", feriaData);
   const feriaRows = feriaData.records || [];
   console.log("FERIA ROWS SAMPLE:", feriaRows[0]);
 
@@ -343,6 +344,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
