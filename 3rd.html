@@ -205,113 +205,28 @@ async function getPoints() {
 
   // 🟢 هات بيانات الهدايا من ورقة Feria
   const feriaRes = await fetch(apiURL + "?type=feriaAll&name=" + encodeURIComponent(name));
-  const feriaData = await feriaRes.json();
-  console.log("FULL FERIA RESPONSE:", feriaData);
-  const feriaRows = feriaData.records || [];
-  console.log("FERIA ROWS SAMPLE:", feriaRows[0]);
+const feriaData = await feriaRes.json();
+console.log("FULL FERIA RESPONSE:", feriaData);
 
-  // 🟢 خريطة الهدايا → النقاط
-  const giftPointsMap = {
-    "لعبة": 4,
-    "كراسة رسم": 3,
-    "ألوان": 2,
-    "ستيكرات": 1,
-    "كتاب صغير": 5
-  };
+// هنا نستخدم القيم الجاهزة من الـ API بدل ما نحسب من feriaRows
+const earned = Number(feriaData.total || 0);
+const used   = Number(feriaData.used || 0);
+const minus  = Number(feriaData.minus || 0);
+const final  = Number(feriaData.final || (earned - used - minus));
 
-  // 🟢 احسب المستخدم (used)
-let used = 0;
-
-console.group("🧪 DEBUG FERIA CALCULATION");
-
-console.log("👤 Selected name:", name);
-console.log("📦 Total feria rows:", feriaRows.length);
-
-feriaRows.forEach((r, index) => {
-  console.group(`➡️ Row #${index + 1}`);
-
-  console.log("🔑 Row keys:", Object.keys(r));
-
-  const childName = String(r["الاسم"] || "").trim();
-  console.log("👶 Child name in row:", `"${childName}"`);
-
-  if (childName !== name) {
-    console.log("⛔ Name does NOT match");
-    console.groupEnd();
-    return;
-  }
-
-  console.log("✅ Name MATCHED");
-
-  ["هدية1", "هدية2"].forEach(col => {
-    console.group(`🎁 Column: ${col}`);
-
-    if (!(col in r)) {
-      console.error(`❌ Column "${col}" NOT FOUND in row`);
-      console.groupEnd();
-      return;
-    }
-
-    const rawCell = r[col];
-    console.log("📄 Raw cell value:", rawCell);
-
-    const cell = String(rawCell || "").trim();
-    if (!cell) {
-      console.warn("⚠️ Cell is EMPTY");
-      console.groupEnd();
-      return;
-    }
-
-    const match = cell.match(/(\d+)\s*[:：]\s*(.+)/);
-    if (!match) {
-      console.error("❌ Regex FAILED for cell:", cell);
-      console.groupEnd();
-      return;
-    }
-
-    const qty = Number(match[1]);
-    const giftBase = match[2].trim();
-
-    console.log("🔢 Quantity:", qty);
-    console.log("🎁 Gift name:", giftBase);
-
-    if (!(giftBase in giftPointsMap)) {
-      console.warn("⚠️ Gift NOT FOUND in map:", giftBase);
-    }
-
-    const points = (giftPointsMap[giftBase] || 0) * qty;
-    console.log("⭐ Points added:", points);
-
-    used += points;
-
-    console.groupEnd();
-  });
-
-  console.groupEnd();
-});
-
-console.log("🏁 FINAL USED POINTS:", used);
-console.groupEnd();
-  
-  // 🟢 احسب المحصلة النهائية
-  const earned = Number(data.total || 0);
-  const minus = Number(data.minus || 0);
-  const final = earned - used - minus;
-
-  // 🟢 اعرض النتيجة
-  resultBox.style.opacity = 0;
-  setTimeout(() => {
-    resultBox.innerHTML = `
-      👤 الاسم: ${data.name}<br>
-      ⭐ النقاط الكلية: ${earned}<br>
-      🎁 النقاط المستخدمة: ${used}<br>
-      ➖ النقاط المخصومة: ${minus}<br>
-      🏆 <strong>المحصلة النهائية: ${final}</strong>
-    `;
-    resultBox.style.opacity = 1;
-    setZizoState("win");
-  }, 200);
-}
+// 🟢 اعرض النتيجة
+resultBox.style.opacity = 0;
+setTimeout(() => {
+  resultBox.innerHTML = `
+    👤 الاسم: ${feriaData.name}<br>
+    ⭐ النقاط الكلية: ${earned}<br>
+    🎁 النقاط المستخدمة: ${used}<br>
+    ➖ النقاط المخصومة: ${minus}<br>
+    🏆 <strong>المحصلة النهائية: ${final}</strong>
+  `;
+  resultBox.style.opacity = 1;
+  setZizoState("win");
+}, 200);
   
 // فقاعات
 function generateBubbles() {
@@ -344,6 +259,7 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
 
