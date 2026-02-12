@@ -221,26 +221,76 @@ async function getPoints() {
   // 🟢 احسب المستخدم (used)
 let used = 0;
 
-feriaRows.forEach(r => {
+console.group("🧪 DEBUG FERIA CALCULATION");
+
+console.log("👤 Selected name:", name);
+console.log("📦 Total feria rows:", feriaRows.length);
+
+feriaRows.forEach((r, index) => {
+  console.group(`➡️ Row #${index + 1}`);
+
+  console.log("🔑 Row keys:", Object.keys(r));
+
   const childName = String(r["الاسم"] || "").trim();
-  if (childName !== name) return;
+  console.log("👶 Child name in row:", `"${childName}"`);
+
+  if (childName !== name) {
+    console.log("⛔ Name does NOT match");
+    console.groupEnd();
+    return;
+  }
+
+  console.log("✅ Name MATCHED");
 
   ["هدية1", "هدية2"].forEach(col => {
-    const cell = String(r[col] || "").trim();
-    if (!cell) return;
+    console.group(`🎁 Column: ${col}`);
 
-    // تقسيم الرقم عن الاسم
-    const parts = cell.split(":");
-    if (parts.length < 2) return;
+    if (!(col in r)) {
+      console.error(`❌ Column "${col}" NOT FOUND in row`);
+      console.groupEnd();
+      return;
+    }
 
-    const qty = Number(parts[0].trim()) || 1;
-    const giftBase = parts[1].trim(); // 🔥 دي كانت المشكلة
+    const rawCell = r[col];
+    console.log("📄 Raw cell value:", rawCell);
 
-    console.log("Parsed:", giftBase, qty);
+    const cell = String(rawCell || "").trim();
+    if (!cell) {
+      console.warn("⚠️ Cell is EMPTY");
+      console.groupEnd();
+      return;
+    }
 
-    used += (giftPointsMap[giftBase] || 0) * qty;
+    const match = cell.match(/(\d+)\s*[:：]\s*(.+)/);
+    if (!match) {
+      console.error("❌ Regex FAILED for cell:", cell);
+      console.groupEnd();
+      return;
+    }
+
+    const qty = Number(match[1]);
+    const giftBase = match[2].trim();
+
+    console.log("🔢 Quantity:", qty);
+    console.log("🎁 Gift name:", giftBase);
+
+    if (!(giftBase in giftPointsMap)) {
+      console.warn("⚠️ Gift NOT FOUND in map:", giftBase);
+    }
+
+    const points = (giftPointsMap[giftBase] || 0) * qty;
+    console.log("⭐ Points added:", points);
+
+    used += points;
+
+    console.groupEnd();
   });
+
+  console.groupEnd();
 });
+
+console.log("🏁 FINAL USED POINTS:", used);
+console.groupEnd();
   
   // 🟢 احسب المحصلة النهائية
   const earned = Number(data.total || 0);
@@ -293,5 +343,6 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
 
