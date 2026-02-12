@@ -215,33 +215,28 @@ async function getPoints() {
     "كراسة رسم": 3,
     "ألوان": 2,
     "ستيكرات": 1,
-    "كتاب صغير": 5,
-    "قرآن": 10,
-    "كتاب ممتاز": 8
+    "كتاب صغير": 5
   };
 
-  // 🟢 احسب المستخدم (used)
   // 🟢 احسب المستخدم (used)
 let used = 0;
 
 feriaRows.forEach(r => {
   const childName = String(r["الاسم"] || "").trim();
   if (childName !== name) return;
-  console.log(
-  "الاسم:", r["الاسم"],
-  "هدية1:", r["هدية1"],
-  "هدية2:", r["هدية2"]
-);
 
   ["هدية1", "هدية2"].forEach(col => {
     const cell = String(r[col] || "").trim();
     if (!cell) return;
 
-    const parts = cell.split(":").map(x => x.trim());
+    // تقسيم الرقم عن الاسم
+    const parts = cell.split(":");
     if (parts.length < 2) return;
 
-    const qty = Number(parts[0]) || 1;
-    const giftBase = parts[1];
+    const qty = Number(parts[0].trim()) || 1;
+    const giftBase = parts[1].trim(); // 🔥 دي كانت المشكلة
+
+    console.log("Parsed:", giftBase, qty);
 
     used += (giftPointsMap[giftBase] || 0) * qty;
   });
@@ -298,4 +293,5 @@ function setZizoState(state) {
 </script>
 </body>
 </html>
+
 
